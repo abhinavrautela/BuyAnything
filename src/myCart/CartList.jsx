@@ -4,7 +4,7 @@ import Button from '../buttons/Button';
 import { mockData } from './mockData';
 const CartList = () => {
   return (
-    <div className=" border  border-gray-300">
+    <div className="border-x lg:border  border-gray-300">
       <div className="lg:flex items-center w-full p-4 hidden ">
         <span className="w-[25%]"></span>
         <h1 className="w-[35%] font-bold text-gray-600">Product</h1>
@@ -31,7 +31,7 @@ const CartList = () => {
         <div className="w-full lg:w-auto">
           <Button
             myClass={
-              " tracking-wide w-full lg:px-12 lg:py-2 text-gray-600 font-bold text-gray-600 opacity-60 hover:bg-gray-200 hover:text-gray-600  "
+              " tracking-wide w-full lg:px-16 lg:py-2 text-gray-600 font-bold text-gray-600 opacity-60 hover:bg-gray-200 hover:text-gray-600 "
             }
           >
             Update Cart

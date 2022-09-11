@@ -19,7 +19,7 @@ const ProductQuantity = ({handleChange, id }) => {
       setItem(1);
     };
   return (
-    <div className="flex flex-row items-center gap-4 ">
+    <div className="flex lg:flex-col xl:flex-row lg:items-start items-center gap-4 ">
       <div className="flex items-center gap-2">
         <button
           className="w-7 h-7 flex items-center cursor-pointer justify-center rounded-full bg-gray-200 hover:bg-primary disabled:opacity-50"
@@ -34,13 +34,20 @@ const ProductQuantity = ({handleChange, id }) => {
           className="bg-gray-100 w-9 text-center  border border-gray-200 "
         />
         <button
-          className="w-7 h-7 flex items-center cursor-pointer justify-center rounded-full bg-gray-200 hover:bg-primary"
+          className="w-7 h-7 flex items-center cursor-pointer  justify-center rounded-full bg-gray-200 hover:bg-primary"
           onClick={() => setItem(item + 1)}
         >
           <GrFormAdd size={20} />
         </button>
       </div>
-      <Button onButtonClick={onAddToCart}>Add To Cart</Button>
+      <div>
+        <Button
+          onButtonClick={onAddToCart}
+          myClass={" w-full px-1  font-poppins"}
+        >
+          Add To Cart
+        </Button>
+      </div>
     </div>
   );
 };

@@ -17,16 +17,16 @@ function Description({ onClick }) {
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row items-center px-4 py-2 bg-white gap-2 w-[70%] mx-auto  relative">
+      <div className="flex flex-col lg:flex-row items-center px-4 py-2 bg-white gap-2 w-[70%] mx-auto  relative">
         {title ? (
           <>
             <Pic img={thumbnail} />
-            <div className="space-y-2 sm:space-y-4 p-4 w-full">
-              <h1 className="text-2xl sm:text-4xl font-poppins text-gray-700">
+            <div className="space-y-2 lg:space-y-4 p-4 w-full">
+              <h1 className="text-2xl lg:text-4xl font-poppins text-gray-700">
                 {title}
               </h1>
-              <div className="sm:space-y-2">
-                <h2 className="text-lg sm:text-xl font-bold text-gray-600">
+              <div className="lg:space-y-2">
+                <h2 className="text-lg lg:text-xl font-bold text-gray-600">
                   ${price}
                 </h2>
                 <p className="text-gray-600 font-poppins">{description}</p>
@@ -35,12 +35,12 @@ function Description({ onClick }) {
                 <ProductQuantity handleChange={onClick} id={pageId} />
                  
               </div>
-              <div className="font-poppins py-2 border-t-2 opacity-85 text-sm">
+              <div className="font-poppins py-2 border-t-2 opacity-85 text-lg">
                 Category:
                 <span className="text-primary capitalize"> {category}</span>
               </div>
             </div>
-            <div className="w-full sm:w-auto flex justify-between">
+            <div className="w-full lg:w-auto flex justify-between">
               {pageId <= 1 ? (
                 <div></div>
               ) : (
@@ -67,10 +67,9 @@ function Description({ onClick }) {
           <Loader size="small" />
         )}
         <Link to="/">
-          <div className="rounded-full border-2  border-gray-300 inline-block hover:bg-gray-200 absolute -top-8 -right-16 sm:top-3 sm:right-3 ">
-            {" "}
-            <IoIosArrowRoundBack size={40} />{" "}
-          </div>{" "}
+          <div className="rounded-full border-2  border-gray-300 inline-block hover:bg-gray-200 absolute -top-8 -right-16 lg:top-3 lg:right-3 ">  
+            <IoIosArrowRoundBack size={40} />
+          </div>
         </Link>
       </div>
     </div>

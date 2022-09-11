@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PageNotFound from './PageNotFound';
 import { Routes, Route } from 'react-router-dom';
+import MainLayout from './MainLayout';
 import FrontPage from './FrontPage';
-import Navbar from "./Navbar";
 import ProductDetail from './ProductDetail';
 import CartPage from "./myCart/CartPage";
 
@@ -21,18 +21,19 @@ function App() {
    }
     const totalCount = Object.keys(cart).reduce((previous, current) => previous + cart[current], 0)
 	return (
-    <div>
-      <Navbar totalItems={totalCount} />
-      <Routes>
-        <Route index element={<FrontPage />} />
-        <Route
-          path="/product/:id/"
-          element={<ProductDetail onClick={handleAddToCart} />}
-        />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </div>
+      <div>
+        <Routes>
+          <Route path="/" element={<MainLayout totalProduts={totalCount} />}>
+            <Route index element={<FrontPage />} />
+            <Route
+              path="/product/:id/"
+              element={<ProductDetail onClick={handleAddToCart} />}
+            />
+		  <Route path='/cart' element={<CartPage />} />
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </div>
   );
 }
 

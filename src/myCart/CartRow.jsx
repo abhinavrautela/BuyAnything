@@ -5,7 +5,7 @@ const CartRow = ({ price, thumbnail, title}) => {
   return (
     <div className="lg:border-t lg:border-gray-300">
       <div className="w-full flex flex-col lg:flex-row items-center lg:p-4 ">
-        <div className="w-full flex justify-end lg:justify-start lg:w-[10%] p-2 lg:p-0">
+        <div className="w-full flex justify-end border-t lg:border-0 border-gray-300 lg:justify-start lg:w-[10%] p-2 lg:p-0">
           <button className="p-2 rounded-full border border-gray-300 text-gray-300 hover:text-primary hover:border-primary">
             <ImCross size={10} />
           </button>

@@ -3,7 +3,7 @@ import Button from '../buttons/Button';
 
 const CartTotal = () => {
   return (
-    <div className='flex justify-end'>
+    <div className="flex justify-end">
       <div className="border border-gray-300  mt-3 w-full lg:w-[49%]">
         <div className="border-b border-gray-300 p-3 bg-gray-100">
           <h1 className="text-bold text-gray-600 text-lg font-bold">
@@ -12,13 +12,17 @@ const CartTotal = () => {
         </div>
         <div className="w-full p-5 space-y-4">
           <div>
-            <div className="p-2 border-b flex items-center border-gray-300 ">
+            <div className="p-2 border-b flex justify-between items-center border-gray-300 ">
               <h1 className="font-bold text-gray-600 w-[40%]">Subtotal</h1>
-              <h3 className="font-bold text-gray-600">$102</h3>
+              <h3 className="font-bold text-gray-600  w-[45%]">
+               $ 98...
+              </h3>
             </div>
-            <div className="p-2 border-b flex items-center border-gray-300 ">
+            <div className="p-2 border-b flex justify-between items-center border-gray-300 ">
               <h1 className="font-bold text-gray-600 w-[40%]">Total</h1>
-              <h3 className="font-bold text-gray-600">$q034</h3>
+              <h3 className="font-bold text-gray-600 w-[45%]">
+                $ 98...
+              </h3>
             </div>
           </div>
           <div>
