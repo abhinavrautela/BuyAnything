@@ -3,7 +3,8 @@ module.exports = {
   theme: {
     extend: {
         fontFamily: {
-            poppins: ['Poppins']
+            poppins: ['Poppins'],
+            boldPoppins : ['P']
         },
         colors: {
             primary: "rgb(255, 81, 81)"

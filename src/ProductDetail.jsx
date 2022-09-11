@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react"
-import Discription from  "./productDetailsComp/Description"
+import React from "react";
+import Discription from "./productDetailsComp/Description";
 
-
-
-function ProductDetails({onClick}) {
-   
-    return (
+function ProductDetails({ onClick }) {
+  return (
     <div>
-        <Discription  onClick={onClick}/>
+      <Discription onClick={onClick} />
     </div>
   );
 }

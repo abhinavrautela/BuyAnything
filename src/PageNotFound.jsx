@@ -1,5 +1,5 @@
 import React from 'react';
-import PageButton from "./PageButton"
+import PageButton from "./buttons/PageButton"
 import { Link } from "react-router-dom";
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 

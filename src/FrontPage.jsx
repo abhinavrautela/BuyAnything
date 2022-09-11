@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ProductNotFound from "./ProductNotFound"
 import Products from "./Products"
-import PageButton from "./PageButton"
+import PageButton from "./buttons/PageButton"
 import { AiOutlineSearch } from 'react-icons/ai';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
  import Loader from "./Loader"
