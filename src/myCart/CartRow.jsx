@@ -45,6 +45,7 @@ const CartRow = ({ price, thumbnail, title}) => {
             ${price}
           </h1>
         </div>
+        
       </div>
     </div>
   );
