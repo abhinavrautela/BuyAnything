@@ -7,6 +7,10 @@ function Loader({size}) {
         mySize = "w-full"
         myClass = "h-max mx-auto"
     }
+     if (size == "xs") {
+       mySize = "w-full h-48";
+       myClass = "w-[20%] mx-auto my-auto";
+     }
     return (
        
         <div className={myClass}>
