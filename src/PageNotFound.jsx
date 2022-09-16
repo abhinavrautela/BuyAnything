@@ -2,7 +2,7 @@ import React from 'react';
 import PageButton from "./buttons/PageButton"
 import { Link } from "react-router-dom";
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
-import Image from "./myImg/404page.jpg"
+import Image from "./myImg/404page.jpg";
 function PageNotFound() {
 
     return (
