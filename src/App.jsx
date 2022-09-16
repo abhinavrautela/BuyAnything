@@ -14,7 +14,7 @@ function App() {
   const handleAddToCart = (productId, count) => {
     let oldcount = cart[productId] || 0;
     const totalItem = { ...cart, [productId]: oldcount + count };
-    setCart(totalItem);
+    setCart(totalItem)
     const cartString = JSON.stringify(totalItem);
     localStorage.setItem("my-cart", cartString);
   };
@@ -31,7 +31,7 @@ function App() {
             path="/product/:id/"
             element={<ProductDetail onClick={handleAddToCart} />}
           />
-          <Route path="/cart" element={<CartPage cartProductCount={cart} />} />
+          <Route path="/cart" element={<CartPage setCart={setCart} cartProductCount={cart} />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

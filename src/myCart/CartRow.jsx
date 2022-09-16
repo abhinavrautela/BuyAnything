@@ -1,5 +1,6 @@
 import React from "react";
 import { ImCross } from "react-icons/im";
+import { Link } from "react-router-dom";
 
 const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProduct}) => {
  const myValue =  productTotalCount[id]
@@ -10,20 +11,27 @@ const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProd
     <div className="lg:border-t lg:border-gray-300">
       <div className="w-full flex flex-col lg:flex-row items-center lg:p-4 ">
         <div className="w-full flex justify-end border-t lg:border-0 border-gray-300 lg:justify-start lg:w-[10%] p-2 lg:p-0">
-          <button className="p-2 rounded-full border border-gray-300 text-gray-300 hover:text-primary hover:border-primary" onClick={onCross} >
+          <button
+            className="p-2 rounded-full border border-gray-300 text-gray-300 hover:text-primary hover:border-primary"
+            onClick={onCross}
+          >
             <ImCross size={10} />
           </button>
         </div>
         <div className="hidden lg:block w-[15%] p-2 lg:p-0 border-t lg:border-0 border-gray-300">
-          <img className="w-16" src={thumbnail} alt="/" />
+          <Link to={'/product/' + id}>
+            <img className="w-16" src={thumbnail} alt="/" />
+          </Link>
         </div>
         <div className="w-full lg:w-[35%] flex items-center p-2 lg:p-0 border-t lg:border-0 border-gray-300">
           <h1 className="w-[40%] lg:hidden font-bold text-gray-600">
             Product:
           </h1>
-          <h1 className="font-poppins text-primary text-right w-full lg:text-left">
-            {title}
-          </h1>
+          <Link to={'/product/' + id}>
+            <h1 className="font-poppins text-primary text-right w-full lg:text-left">
+              {title}
+            </h1>
+          </Link>
         </div>
         <div className="w-full lg:w-[15%] flex items-center p-2 lg:p-0 border-t lg:border-0 border-gray-300">
           <h1 className="w-[40%] lg:hidden font-bold text-gray-600">Price:</h1>
@@ -49,7 +57,6 @@ const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProd
             ${price}
           </h1>
         </div>
-        
       </div>
     </div>
   );

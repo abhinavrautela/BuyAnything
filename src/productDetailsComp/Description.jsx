@@ -7,14 +7,14 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Pic from "./Pic";
 function Description({ onClick }) {
-  const [loader, setLoader] = useState(true)
+  
   const [productDetail, setProductDetail] = useState({});
   const pageId = +useParams().id;
   const { title, price, thumbnail, description, category } = productDetail;
   useEffect(() => {
     const myResponses = getProductsDetail(pageId);
     myResponses.then((myResponses) => setProductDetail(myResponses.data));
-  
+     
   }, [pageId]);
 
   return (
