@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import ProductQuantity from "./ProductQuantity";
 import Loader from "../Loader";
 import { useParams } from "react-router-dom";
-import { getProductsItem } from "../api.js";
+import { getProductsDetail } from "../api.js";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Pic from "./Pic";
 function Description({ onClick }) {
+  
   const [productDetail, setProductDetail] = useState({});
   const pageId = +useParams().id;
   const { title, price, thumbnail, description, category } = productDetail;
   useEffect(() => {
-    const myResponses = getProductsItem(pageId);
+    const myResponses = getProductsDetail(pageId);
     myResponses.then((myResponses) => setProductDetail(myResponses.data));
+     
   }, [pageId]);
 
   return (

@@ -10,10 +10,11 @@ function App() {
   const myItems = localStorage.getItem("my-cart") || "{}";
   const myItemsValue = JSON.parse(myItems);
   const [cart, setCart] = useState(myItemsValue);
+  console.log("cart", cart);
   const handleAddToCart = (productId, count) => {
     let oldcount = cart[productId] || 0;
     const totalItem = { ...cart, [productId]: oldcount + count };
-    setCart(totalItem);
+    setCart(totalItem)
     const cartString = JSON.stringify(totalItem);
     localStorage.setItem("my-cart", cartString);
   };
@@ -30,7 +31,7 @@ function App() {
             path="/product/:id/"
             element={<ProductDetail onClick={handleAddToCart} />}
           />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path="/cart" element={<CartPage setCart={setCart} cartProductCount={cart} />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

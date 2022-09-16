@@ -6,7 +6,7 @@ export const getProducts = (skip) => {
     return response;
    }
 
-export const getProductsItem = (id) => {
+export const getProductsDetail = (id) => {
     const response = axios.get(BASE_URL+"products/"+id)
     return response;
 }
