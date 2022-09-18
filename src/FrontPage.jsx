@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import ProductNotFound from "./ProductNotFound";
 import Products from "./Products";
 import PageButton from "./buttons/PageButton";
@@ -11,24 +11,33 @@ function FrontPage() {
   const [query, setQuery] = useState("");
   const [sortValue, setSortValue] = useState("default");
   const [mySkip, setMySkip] = useState(0);
-  useEffect(() => {
+  useMemo(() => {
     const productData = getProducts(mySkip);
     productData.then((response) => setProduct(response.data.products));
   }, [mySkip]);
 
   let data = product;
-  data = data.filter(
-    (e) => e.title.toLowerCase().indexOf(query.toLowerCase()) != -1
+
+  data = useMemo(
+    () =>
+      data.filter(
+        (e) => e.title.toLowerCase().indexOf(query.toLowerCase()) != -1
+      ),
+    [query]
   );
-  if (sortValue == "title") {
-    data.sort((x, y) => (x.title < y.title ? -1 : 1));
-  }
-  if (sortValue == "low_price") {
-    data.sort((x, y) => x.price - y.price);
-  }
-  if (sortValue == "high_price") {
-    data.sort((x, y) => y.price - x.price);
-  }
+
+  useMemo(
+    () => {
+    if (sortValue == "title") {
+      data.sort((x, y) => (x.title < y.title ? -1 : 1));
+    }
+    if (sortValue == "low_price") {
+      data.sort((x, y) => x.price - y.price);
+    }
+    if (sortValue == "high_price") {
+      data.sort((x, y) => y.price - x.price);
+    }
+  }, [sortValue]);
 
   return (
     <div className="px-[10%] sm:px-[20%] ">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 function Loader({size}) {
      let mySize = "w-[40%] sm:w-[30%] h-56"
@@ -19,4 +19,4 @@ function Loader({size}) {
     );
 }
 
-export default Loader;
+export default memo(Loader);

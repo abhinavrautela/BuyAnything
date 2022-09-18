@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React from "react";
 import CartRow from "./CartRow";
 import Button from "../buttons/Button";
 import { getProductsDetail } from "../api";
@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import EmptyCart from "./EmptyCart";
 import Loader from "../Loader";
 
-const CartList = ({setCart, productTotalCount }) => {
+const CartList = ({setCart, productTotalCount}) => {
   const [loader, setLoader] = useState();
   const [cartProduct, setCartProduct] = useState([]);
   const removeProduct = (id) => {

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,  useMemo } from "react";
 import PageNotFound from "./PageNotFound";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "./MainLayout";
 import FrontPage from "./FrontPage";
-import ProductDetail from "./ProductDetail";
+import Discription from "./productDetailsComp/Description";
 import CartPage from "./myCart/CartPage";
+
 
 function App() {
   const myItems = localStorage.getItem("my-cart") || "{}";
@@ -18,10 +19,10 @@ function App() {
     const cartString = JSON.stringify(totalItem);
     localStorage.setItem("my-cart", cartString);
   };
-  const totalCount = Object.keys(cart).reduce(
+  const totalCount = useMemo(()=> Object.keys(cart).reduce(
     (previous, current) => previous + cart[current],
     0
-  );
+  ), [cart]);
   return (
     <div>
       <Routes>
@@ -29,9 +30,12 @@ function App() {
           <Route index element={<FrontPage />} />
           <Route
             path="/product/:id/"
-            element={<ProductDetail onClick={handleAddToCart} />}
+            element={<Discription onClick={handleAddToCart} />}
           />
-          <Route path="/cart" element={<CartPage setCart={setCart} cartProductCount={cart} />} />
+          <Route
+            path="/cart"
+            element={<CartPage setCart={setCart} cartProductCount={cart} />}
+          />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

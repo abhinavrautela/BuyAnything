@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 function ProductNotFound() {
     return (
     <>
@@ -11,4 +11,4 @@ function ProductNotFound() {
   );
 }
 
-export default ProductNotFound;
+export default memo(ProductNotFound);
