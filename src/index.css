@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100&family=Fjalla+One&family=Inter:wght@700&family=Mochiy+Pop+One&family=Poppins:ital,wght@0,300;0,400;1,300&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

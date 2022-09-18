@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PageButton from "./buttons/PageButton"
 import { Link } from "react-router-dom";
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
@@ -21,4 +21,4 @@ function PageNotFound() {
     );
 }
 
-export default PageNotFound;
+export default memo(PageNotFound);

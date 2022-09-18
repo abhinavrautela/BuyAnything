@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 const EmptyCart = () => {
   return (
@@ -6,4 +6,4 @@ const EmptyCart = () => {
   )
 }
 
-export default EmptyCart
+export default memo(EmptyCart);
