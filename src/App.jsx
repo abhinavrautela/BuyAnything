@@ -6,6 +6,7 @@ import FrontPage from "./FrontPage";
 import Discription from "./productDetailsComp/Description";
 import CartPage from "./myCart/CartPage";
 import SignUpPage from "./Login_SignUpPages/SignUpPage";
+import LoginPage from "./Login_SignUpPages/LoginPage";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           />
         </Route>
         <Route path="/signUpPage" element={<SignUpPage />} />
+        <Route path="/logInPage" element={<LoginPage />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
