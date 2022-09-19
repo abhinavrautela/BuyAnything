@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useMemo } from "react";
 import Button from '../buttons/Button';
 
-const CartTotal = () => {
+const CartTotal = ({cartProductPrice, cartProductId, cartInfo}) => {
   return (
     <div className="flex justify-end">
       <div className="border border-gray-300  mt-3 w-full lg:w-[49%]">
@@ -15,13 +15,13 @@ const CartTotal = () => {
             <div className="p-2 border-b flex justify-between items-center border-gray-300 ">
               <h1 className="font-bold text-gray-600 w-[40%]">Subtotal</h1>
               <h3 className="font-bold text-gray-600  w-[45%]">
-               $ 98...
+               $ {}
               </h3>
             </div>
             <div className="p-2 border-b flex justify-between items-center border-gray-300 ">
               <h1 className="font-bold text-gray-600 w-[40%]">Total</h1>
               <h3 className="font-bold text-gray-600 w-[45%]">
-                $ 98...
+                $ {}
               </h3>
             </div>
           </div>

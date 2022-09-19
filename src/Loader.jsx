@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-
 function Loader({size}) {
      let mySize = "w-[40%] sm:w-[30%] h-56"
      let myClass = "min-h-screen my-40"

@@ -23,7 +23,7 @@ function FrontPage() {
       data.filter(
         (e) => e.title.toLowerCase().indexOf(query.toLowerCase()) != -1
       ),
-    [query]
+    [query, product]
   );
 
   useMemo(

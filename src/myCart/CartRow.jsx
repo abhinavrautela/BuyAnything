@@ -3,7 +3,7 @@ import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
 
 const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProduct}) => {
- const myValue =  productTotalCount[id]
+ const productQuantity = productTotalCount[id];
  const onCross = () =>{
   removeCartProduct(id)
  }
@@ -19,7 +19,7 @@ const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProd
           </button>
         </div>
         <div className="hidden lg:block w-[15%] p-2 lg:p-0 border-t lg:border-0 border-gray-300">
-          <Link to={'/product/' + id}>
+          <Link to={"/product/" + id}>
             <img className="w-16" src={thumbnail} alt="/" />
           </Link>
         </div>
@@ -27,7 +27,7 @@ const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProd
           <h1 className="w-[40%] lg:hidden font-bold text-gray-600">
             Product:
           </h1>
-          <Link to={'/product/' + id}>
+          <Link to={"/product/" + id}>
             <h1 className="font-poppins text-primary text-right w-full lg:text-left">
               {title}
             </h1>
@@ -45,7 +45,7 @@ const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProd
           </h1>
           <input
             type="number"
-            value={myValue}
+            value={productQuantity}
             className="p-1 border border-gray-500 outline-none text-center w-14 bg-transparent font-poppins text-gray-500"
           ></input>
         </div>
@@ -54,7 +54,7 @@ const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProd
             Subtotal:
           </h1>
           <h1 className="font-bold text-gray-500 text-right w-full lg:w-[10%] lg:text-left">
-            ${price}
+            ${price*productQuantity}
           </h1>
         </div>
       </div>
