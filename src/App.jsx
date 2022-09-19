@@ -5,6 +5,7 @@ import MainLayout from "./MainLayout";
 import FrontPage from "./FrontPage";
 import Discription from "./productDetailsComp/Description";
 import CartPage from "./myCart/CartPage";
+import SignUpPage from "./Login_SignUpPages/SignUpPage";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             element={<CartPage setCart={setCart} cartProductCount={cart} />}
           />
         </Route>
+        <Route path="/signUpPage" element={<SignUpPage />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
