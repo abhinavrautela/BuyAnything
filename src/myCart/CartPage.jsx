@@ -8,7 +8,7 @@ import Loader from "../Loader";
 
 const CartPage = ({ cartProductCount, setCart }) => {
   const [cartProduct, setCartProduct] = useState([]);
-  const [loader, setLoader] = useState(false)
+ 
   useEffect(() => {
     const bigPromise = Object.keys(cartProductCount).map((e) =>
       getProductsDetail(e)
@@ -22,12 +22,12 @@ const CartPage = ({ cartProductCount, setCart }) => {
     <div className="px-[10%] sm:px-[20%]">
       <div className="px-10 py-20 bg-white flex justify-end ">
         <div className="w-full">
-          {loader ? <CartList
+           <CartList
             setCartProduct={setCartProduct}
             setCart={setCart}
             productTotalCount={cartProductCount}
             cartProduct={cartProduct}
-          /> : <Loader size={"xs"}/> }
+          /> 
           <CartTotal/>
         </div>
         <div className="rounded-full  hover:bg-gray-200 absolute -mt-12 text-gray-400 hover:text-gray-700">

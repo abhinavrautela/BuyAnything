@@ -1,12 +1,26 @@
-import React from "react";
+import React, {useMemo, useState} from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
+import {
+  AiOutlineUser,
+  AiOutlineMail,
+  AiOutlineEyeInvisible,
+  AiOutlineEye,
+} from "react-icons/ai";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const SignUpPage = () => {
+   const [visiblePswd, setVisiblePswd] = useState(false);
+   const [type, setType] = useState("");
+   useMemo(() => {
+     if (visiblePswd) {
+       setType("text");
+     } else {
+       setType("password");
+     }
+   }, [visiblePswd]);
   const onFormSubmit = (values) => {
     console.log(
       "request send",
@@ -76,7 +90,7 @@ const SignUpPage = () => {
                   type="name"
                   autocomplete="name"
                   required
-                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-700 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
+                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-400 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
                   placeholder="Name"
                 />
               </div>
@@ -101,7 +115,7 @@ const SignUpPage = () => {
                   type="email"
                   autocomplete="email"
                   required
-                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-700 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
+                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-400 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
                   placeholder="Email Address"
                 />
               </div>
@@ -123,12 +137,21 @@ const SignUpPage = () => {
                   value={values.create_password}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  type="password"
+                  type={type}
                   autocomplete="current-password"
                   required
-                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-700 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
+                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-400 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
                   placeholder="Create Password"
                 />
+                {visiblePswd ? (
+                  <button type="button" onClick={() => setVisiblePswd(false)}>
+                    <AiOutlineEye size={20} />
+                  </button>
+                ) : (
+                  <button type="button" onClick={() => setVisiblePswd(true)}>
+                    <AiOutlineEyeInvisible size={20} />
+                  </button>
+                )}
               </div>
               {errors.create_password && touched.create_password && (
                 <div className="absolute mt-3 ml-8 text-xs font-poppins text-red-600">
@@ -152,7 +175,7 @@ const SignUpPage = () => {
                   type="password"
                   autocomplete="current-password"
                   required
-                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-700 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
+                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-400 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
                   placeholder="Confirm Password"
                 />
               </div>
