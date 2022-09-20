@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineClose } from "react-icons/ai";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenuRight } from "react-icons/cg";
+
+
 function Navbar({ totalItems }) {
+  const [navbar, toggalNavbar] = useState(false);
+
   return (
     <div className="w-full bg-white flex justify-between items-center h-20 px-[10%] sm:px-[20%] py-2 mb-10 shadow shadow-gray-100 ">
       <img
@@ -36,7 +39,37 @@ function Navbar({ totalItems }) {
           </div>
         </Link>
       </div>
-      <div className=" lg:hidden"><CgMenuRight /></div>
+      <div className=" lg:hidden flex flex-col  items-end">
+        <div className="relative">
+          <button
+            className="outline-none"
+            onClick={() => toggalNavbar(!navbar)}
+          >
+            <CgMenuRight size={26} />
+          </button>
+        </div>
+
+        <div
+          className = {
+            navbar
+              ? "flex flex-col items-center bg-gray-300 text-xs font-poppins absolute mt-6 duration-200 space-y-1 rounded-md py-3 px-4 shadow-lg"
+              : "right-[-100%] top-0 ease-out duration-300 absolute"
+          }
+        >
+          <Link to="/" className="hover:text-primary ">
+            Home
+          </Link>
+          <Link to="/aboutus" className="hover:text-primary">
+            AboutUS
+          </Link>
+          <Link to="/loginpage" className="hover:text-primary">
+            LogIN
+          </Link>
+          <Link to="/signuppage" className="hover:text-primary">
+            SignUp
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
