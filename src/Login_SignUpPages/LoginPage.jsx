@@ -1,12 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineMail } from "react-icons/ai";
+import {
+  AiOutlineMail,
+  AiOutlineEyeInvisible,
+  AiOutlineEye,
+} from "react-icons/ai";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useState } from "react";
+import { useMemo } from "react";
 
 const LoginPage = () => {
+  const [visiblePswd, setVisiblePswd] = useState(false)
+  const [type, setType] = useState("")
+  useMemo(()=> {
+     if (visiblePswd) {
+       setType("text");
+     } else {
+       setType("password");
+     }
+  }, [visiblePswd])
+ 
+
   const onFormSubmit = (values) => {
     console.log(
       "request send",
@@ -68,7 +85,7 @@ const LoginPage = () => {
                   type="email"
                   autocomplete="email"
                   required
-                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-700 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
+                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-400 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
                   placeholder="Email Address"
                 />
               </div>
@@ -90,12 +107,21 @@ const LoginPage = () => {
                   value={values.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  type="password"
+                  type={type}
                   autocomplete="password"
                   required
-                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-700 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
+                  className="relative block w-full appearance-none   bg-transparent   text-gray-900 placeholder-gray-400 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
                   placeholder="Password"
                 />
+                {visiblePswd ? (
+                  <button type="button" onClick={() => setVisiblePswd(false)}>
+                    <AiOutlineEye size={20} />
+                  </button>
+                ) : (
+                  <button type="button" onClick={() => setVisiblePswd(true)}>
+                    <AiOutlineEyeInvisible size={20} />
+                  </button>
+                )}
               </div>
               {errors.password && touched.password && (
                 <div className="absolute mt-3 ml-8 text-xs font-poppins text-red-600">
@@ -105,12 +131,17 @@ const LoginPage = () => {
             </div>
           </div>
 
-        <div className="flex items-center justify-between">
-        <div className="hidden md:block"></div>
-        <div className="text-sm">
-          <Link to="/forgetPswd" className="font-poppins text-gray-400 hover:text-primary">Forgot your password?</Link>
-        </div>
-      </div>
+          <div className="flex items-center justify-between">
+            <div className="hidden md:block"></div>
+            <div className="text-sm">
+              <Link
+                to="/forgetPswd"
+                className="font-poppins text-gray-400 hover:text-primary"
+              >
+                Forgot your password?
+              </Link>
+            </div>
+          </div>
 
           <div>
             <button
@@ -118,7 +149,7 @@ const LoginPage = () => {
               disabled={!isValid}
               className="group relative flex w-full justify-center rounded-md border-b border-transparent bg-primary py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 disabled:opacity-50 disabled:text-gray-400"
             >
-              Sign In
+              Log In
             </button>
           </div>
           <div className="text-xs md:text-sm flex lg:w-full lg:justify-center ">
