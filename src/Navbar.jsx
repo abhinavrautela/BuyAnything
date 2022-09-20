@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenuRight } from "react-icons/cg";
+import { useEffect } from "react";
+import { useMemo } from "react";
 
 
 function Navbar({ totalItems }) {
   const [navbar, toggalNavbar] = useState(false);
-
-  return (
+  useMemo(()=> {
+    setTimeout(() => {
+      toggalNavbar(false);
+    }, 7000);
+  }, [navbar]) 
+  
+ return (
     <div className="w-full bg-white flex justify-between items-center h-20 px-[10%] sm:px-[20%] py-2 mb-10 shadow shadow-gray-100 ">
       <img
         src="https://s3-ap-southeast-1.amazonaws.com/p2swebsite/images/smeKhabar/news/amazon_1618225124036_113.jpg"
@@ -53,7 +60,7 @@ function Navbar({ totalItems }) {
         <div className=" flex flex-col  items-end">
           <div className="relative mt-2">
             <button
-              className="outline-none"
+              className="outline-none "
               onClick={() => toggalNavbar(!navbar)}
             >
               <CgMenuRight size={26} />
@@ -63,8 +70,8 @@ function Navbar({ totalItems }) {
           <div
             className={
               navbar
-                ? "flex flex-col items-center bg-gray-300 text-xs font-poppins absolute mt-9 duration-200 space-y-1 rounded-md py-3 px-4 shadow-lg"
-                : "right-[-100%] top-0 ease-out duration-300 absolute"
+                ? "flex flex-col items-center text-gray-700 bg-gray-300 text-xs font-poppins absolute mt-9 duration-200 space-y-2 rounded-md py-3 px-4 shadow-lg z-10"
+                : "w-1 h-1 p-0 -m-1 overflow-hidden ease-out duration-300 absolute"
             }
           >
             <Link to="/" className="hover:text-primary ">
