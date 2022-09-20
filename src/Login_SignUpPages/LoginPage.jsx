@@ -114,11 +114,19 @@ const LoginPage = () => {
                   placeholder="Password"
                 />
                 {visiblePswd ? (
-                  <button type="button" onClick={() => setVisiblePswd(false)}>
+                  <button
+                    className="outline-none"
+                    type="button"
+                    onClick={() => setVisiblePswd(false)}
+                  >
                     <AiOutlineEye size={20} />
                   </button>
                 ) : (
-                  <button type="button" onClick={() => setVisiblePswd(true)}>
+                  <button
+                    className="outline-none"
+                    type="button"
+                    onClick={() => setVisiblePswd(true)}
+                  >
                     <AiOutlineEyeInvisible size={20} />
                   </button>
                 )}
