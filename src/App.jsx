@@ -8,6 +8,7 @@ import CartPage from "./myCart/CartPage";
 import SignUpPage from "./Login_SignUpPages/SignUpPage";
 import LoginPage from "./Login_SignUpPages/LoginPage";
 import ForgotPswdPage from "./Login_SignUpPages/ForgotPswdPage";
+import AboutUs from "./TnC_AboutUs/AboutUs";
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path="/signUpPage" element={<SignUpPage />} />
         <Route path="/logInPage" element={<LoginPage />} />
         <Route path="/forgetPswd" element={<ForgotPswdPage /> } />
+        <Route path="/aboutus" element={<AboutUs /> } />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
