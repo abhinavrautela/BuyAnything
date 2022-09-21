@@ -39,6 +39,7 @@ const ForgotPswdPage = () => {
           validationSchema={schema}
           validateOnMount
         >
+        {({isValid}) =>
           <Form className="mt-4 space-y-6">
             
               <Input
@@ -47,6 +48,7 @@ const ForgotPswdPage = () => {
                 type="email"
                 autocomplete="email"
                 id="email"
+                placeholder="Email"
                 required={true}
               />
             
@@ -66,13 +68,13 @@ const ForgotPswdPage = () => {
             <div>
               <button
                 type="submit"
-                // disabled={!isValid}
+                disabled={!isValid}
                 className="group relative flex w-full justify-center rounded-md border-b border-transparent bg-primary py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 disabled:opacity-50 disabled:text-gray-400"
               >
                 Get Password
               </button>
             </div>
-          </Form>
+          </Form>}
         </Formik>
       </div>
     </div>
