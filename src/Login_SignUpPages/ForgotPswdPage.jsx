@@ -99,4 +99,4 @@ const ForgotPswdPage = () => {
   );
 }
 
-export default ForgotPswdPage
+export default ForgotPswdPage;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import ProductQuantity from "./ProductQuantity";
 import Loader from "../Loader";
 import { useParams } from "react-router-dom";
@@ -6,21 +6,27 @@ import { getProductsDetail } from "../api.js";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Pic from "./Pic";
+
+
 function Description({ onClick }) {
-  
+  const [loader, setLoader] = useState(true);
   const [productDetail, setProductDetail] = useState({});
   const pageId = +useParams().id;
   const { title, price, thumbnail, description, category } = productDetail;
-  useEffect(() => {
+  useMemo(() => {
     const myResponses = getProductsDetail(pageId);
-    myResponses.then((myResponses) => setProductDetail(myResponses.data));
-     
+    myResponses.then((myResponses) => {
+      setProductDetail(myResponses.data);
+      setLoader(false);
+    }).catch(setLoader(true))
   }, [pageId]);
 
   return (
     <div>
       <div className="flex flex-col lg:flex-row items-center px-4 py-2 bg-white gap-2 w-[70%] mx-auto  relative">
-        {title ? (
+        {loader ? (
+          <Loader size="small" />
+        ) : (
           <>
             <Pic img={thumbnail} />
             <div className="space-y-2 lg:space-y-4 p-4 w-full">
@@ -35,7 +41,6 @@ function Description({ onClick }) {
               </div>
               <div>
                 <ProductQuantity handleChange={onClick} id={pageId} />
-                 
               </div>
               <div className="font-poppins py-2 border-t-2 opacity-85 text-lg">
                 Category:
@@ -65,11 +70,9 @@ function Description({ onClick }) {
               )}
             </div>
           </>
-        ) : (
-          <Loader size="small" />
         )}
         <Link to="/">
-          <div className="rounded-full border-2  border-gray-300 inline-block hover:bg-gray-200 absolute -top-8 -right-16 lg:top-3 lg:right-3 ">  
+          <div className="rounded-full border-2  border-gray-300 inline-block hover:bg-gray-200 absolute -top-8 -right-16 lg:top-3 lg:right-3 ">
             <IoIosArrowRoundBack size={40} />
           </div>
         </Link>

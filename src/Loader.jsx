@@ -8,7 +8,7 @@ function Loader({size}) {
     }
      if (size == "xs") {
        mySize = "w-full h-48";
-       myClass = "w-[20%] mx-auto my-auto";
+       myClass = "w-[20%] mx-auto my-auto ";
      }
     return (
        
