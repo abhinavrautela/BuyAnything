@@ -1,4 +1,4 @@
-import React, { useState,  useMemo } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import PageNotFound from "./PageNotFound";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "./MainLayout";
@@ -9,6 +9,7 @@ import SignUpPage from "./Login_SignUpPages/SignUpPage";
 import LoginPage from "./Login_SignUpPages/LoginPage";
 import ForgotPswdPage from "./Login_SignUpPages/ForgotPswdPage";
 import AboutUs from "./TnC_AboutUs/AboutUs";
+
 
 
 function App() {
