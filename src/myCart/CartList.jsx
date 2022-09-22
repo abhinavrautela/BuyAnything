@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import CartRow from "./CartRow";
 import Button from "../buttons/Button";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import EmptyCart from "./EmptyCart";
+import { CartContext } from "../App";
 
-
-const CartList = ({ setCart, productTotalCount, cartProduct, setCartProduct}) => {
+const CartList = ({ productTotalCount, cartProduct, setCartProduct }) => {
+  const setCart = useContext(CartContext);
   const [loader, setLoader] = useState();
-  
+
   const removeProduct = (id) => {
     const mylocalStorage = JSON.parse(localStorage.getItem("my-cart"));
     const { [id]: deletedItem, ...rest } = mylocalStorage;
     setCart(rest);
     localStorage.setItem("my-cart", JSON.stringify(rest));
-     setCartProduct(cartProduct.filter((e) => e.data.id != id));
+    setCartProduct(cartProduct.filter((e) => e.data.id != id));
   };
-  
+
   return (
     <div className="border-x lg:border  border-gray-300">
       <div className="lg:flex items-center w-full p-4 hidden ">

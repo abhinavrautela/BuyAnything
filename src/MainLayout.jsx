@@ -2,10 +2,10 @@ import React from "react";
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
 
-const MainLayout = ({ totalProduts }) => {
+const MainLayout = () => {
   return (
     <div>
-      <Navbar totalItems={totalProduts} />
+      <Navbar />
       <div>
         <Outlet />
       </div>

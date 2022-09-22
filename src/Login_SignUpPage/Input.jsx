@@ -13,7 +13,6 @@ const Input = ({
   placeholder,
 }) => {
   const [{ ...rest }, { error, touched }] = useField(name);
-  console.log("rest", { ...rest });
   let borderClass = "border-gray-500";
 
   if (error && touched) {

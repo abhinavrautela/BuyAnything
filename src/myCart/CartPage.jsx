@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { RiHomeLine } from "react-icons/ri";
 import Loader from "../Loader";
 
-const CartPage = ({ cartProductCount, setCart }) => {
+const CartPage = ({ cartProductCount }) => {
   const [cartProduct, setCartProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,7 +29,7 @@ const CartPage = ({ cartProductCount, setCart }) => {
           ) : (
             <CartList
               setCartProduct={setCartProduct}
-              setCart={setCart}
+            
               productTotalCount={cartProductCount}
               cartProduct={cartProduct}
             />

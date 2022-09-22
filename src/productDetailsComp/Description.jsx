@@ -40,7 +40,7 @@ function Description({ onClick }) {
                 <p className="text-gray-600 font-poppins">{description}</p>
               </div>
               <div>
-                <ProductQuantity handleChange={onClick} id={pageId} />
+                <ProductQuantity id={pageId} />
               </div>
               <div className="font-poppins py-2 border-t-2 opacity-85 text-lg">
                 Category:
