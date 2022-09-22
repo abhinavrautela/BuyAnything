@@ -4,7 +4,7 @@ function Stars({productName}) {
     return (
     <>
        
-    <div class="stars" >
+    <div id="stars" >
          <input type="checkbox" id={productName + "five" } name="rate"/>
          <label className="cursor-pointer" htmlFor={productName + "five"}></label>
          <input type="checkbox" id={productName + "four"} name="rate"/>

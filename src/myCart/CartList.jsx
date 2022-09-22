@@ -7,7 +7,6 @@ import { CartContext } from "../App";
 
 const CartList = ({ productTotalCount, cartProduct, setCartProduct }) => {
   const setCart = useContext(CartContext);
-  const [loader, setLoader] = useState();
 
   const removeProduct = (id) => {
     const mylocalStorage = JSON.parse(localStorage.getItem("my-cart"));

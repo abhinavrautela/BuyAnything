@@ -4,7 +4,6 @@ module.exports = {
     extend: {
         fontFamily: {
             poppins: ['Poppins'],
-            boldPoppins : ['P']
         },
         colors: {
             primary: "rgb(255, 81, 81)"

@@ -67,7 +67,7 @@ function FrontPage() {
           <div className="space-y-28">
             <div className="h-full grid grid-cols-1 sm:grid-cols-3 grid-flow-rows gap-10">
               {data.length > 0 ? (
-                data.map((e) => <Products {...e} />)
+                data.map((e) =><Products {...e} key={e.id}/> )
               ) : (
                 <ProductNotFound />
               )}
