@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from '../buttons/Button';
 import { BsDash } from "react-icons/bs";
 import { GrFormAdd } from "react-icons/gr";
+import { CartQuantityContext } from "../App";
 
-const ProductQuantity = ({handleChange, id }) => {
+const ProductQuantity = ({ id }) => {
+  const handleChange = useContext(CartQuantityContext)
     const [item, setItem] = useState(1);
     const [disabled, setDisabled] = useState(false);
     useEffect(() => {

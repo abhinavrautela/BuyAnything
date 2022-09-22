@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenuRight } from "react-icons/cg";
 import { useMemo } from "react";
+import { NevbarCountContext } from "./App";
 
 
-function Navbar({ totalItems }) {
+function Navbar() {
+  const totalItems = useContext(NevbarCountContext)
   const [navbar, toggalNavbar] = useState(false);
   useMemo(()=> {
     setTimeout(() => {
