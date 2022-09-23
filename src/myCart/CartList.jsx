@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
 import CartRow from "./CartRow";
 import Button from "../buttons/Button";
-import { useState } from "react";
 import EmptyCart from "./EmptyCart";
 import { CartContext } from "../App";
 
-const CartList = ({ productTotalCount, cartProduct, setCartProduct }) => {
-  const setCart = useContext(CartContext);
-
+const CartList = ({ cartProduct, setCartProduct }) => {
+  const { setCart } = useContext(CartContext);
   const removeProduct = (id) => {
     const mylocalStorage = JSON.parse(localStorage.getItem("my-cart"));
     const { [id]: deletedItem, ...rest } = mylocalStorage;
@@ -15,6 +13,7 @@ const CartList = ({ productTotalCount, cartProduct, setCartProduct }) => {
     localStorage.setItem("my-cart", JSON.stringify(rest));
     setCartProduct(cartProduct.filter((e) => e.data.id != id));
   };
+
 
   return (
     <div className="border-x lg:border  border-gray-300">
@@ -32,7 +31,6 @@ const CartList = ({ productTotalCount, cartProduct, setCartProduct }) => {
             {cartProduct.map((e) => (
               <CartRow
                 {...e.data}
-                productTotalCount={productTotalCount}
                 removeCartProduct={removeProduct}
               />
             ))}
@@ -56,6 +54,7 @@ const CartList = ({ productTotalCount, cartProduct, setCartProduct }) => {
         </div>
         <div className="w-full lg:w-auto">
           <Button
+           
             myClass={
               " tracking-wide w-full lg:px-16 lg:py-2 text-gray-600 font-bold text-gray-600 opacity-60 hover:bg-gray-200 hover:text-gray-600 "
             }

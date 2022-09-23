@@ -16,6 +16,7 @@ function App() {
   const myItems = localStorage.getItem("my-cart") || "{}";
   const myItemsValue = JSON.parse(myItems);
   const [cart, setCart] = useState(myItemsValue);
+  const cartData = {cart, setCart}
   const handleAddToCart = (productId, count) => {
     let oldcount = cart[productId] || 0;
     const totalItem = { ...cart, [productId]: oldcount + count };
@@ -54,8 +55,8 @@ function App() {
           <Route
             path="/cart"
             element={
-              <CartContext.Provider value={setCart}>
-                <CartPage cartProductCount={cart} />
+              <CartContext.Provider value={cartData}>
+                <CartPage />
               </CartContext.Provider>
             }
           />

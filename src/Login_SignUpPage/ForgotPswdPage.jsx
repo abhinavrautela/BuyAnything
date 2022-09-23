@@ -4,7 +4,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { AiOutlineMail } from "react-icons/ai";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import Input from "./Input";
+import { FormikInput } from "./Input";
 
 const ForgotPswdPage = () => {
   const onFormSubmit = () => {
@@ -15,7 +15,7 @@ const ForgotPswdPage = () => {
     email: Yup.string().required().email(),
   });
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center my-28">
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg space-y-3">
         <div className="flex  w-full items-center justify-between">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
@@ -39,10 +39,9 @@ const ForgotPswdPage = () => {
           validationSchema={schema}
           validateOnMount
         >
-        {({isValid}) =>
-          <Form className="mt-4 space-y-6">
-            
-              <Input
+          {({ isValid }) => (
+            <Form className="mt-4 space-y-6">
+              <FormikInput
                 icon={<AiOutlineMail />}
                 name="email"
                 type="email"
@@ -51,30 +50,30 @@ const ForgotPswdPage = () => {
                 placeholder="Email"
                 required={true}
               />
-            
 
-            <div className="flex items-center justify-between">
-              <div className="hidden md:block"></div>
-              <div className="text-sm">
-                <Link
-                  to="/logInPage"
-                  className="font-poppins text-gray-400 hover:text-primary"
-                >
-                  Back To LogIn
-                </Link>
+              <div className="flex items-center justify-between">
+                <div className="hidden md:block"></div>
+                <div className="text-sm">
+                  <Link
+                    to="/logInPage"
+                    className="font-poppins text-gray-400 hover:text-primary"
+                  >
+                    Back To LogIn
+                  </Link>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <button
-                type="submit"
-                disabled={!isValid}
-                className="group relative flex w-full justify-center rounded-md border-b border-transparent bg-primary py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 disabled:opacity-50 disabled:text-gray-400"
-              >
-                Get Password
-              </button>
-            </div>
-          </Form>}
+              <div>
+                <button
+                  type="submit"
+                  disabled={!isValid}
+                  className="group relative flex w-full justify-center rounded-md border-b border-transparent bg-primary py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 disabled:opacity-50 disabled:text-gray-400"
+                >
+                  Get Password
+                </button>
+              </div>
+            </Form>
+          )}
         </Formik>
       </div>
     </div>

@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import CartList from "./CartList";
 import CartTotal from "./CartTotal";
 import { getProductsDetail } from "../api";
 import { Link } from "react-router-dom";
 import { RiHomeLine } from "react-icons/ri";
 import Loader from "../Loader";
+import { CartContext } from "../App";
 
-const CartPage = ({ cartProductCount }) => {
+const CartPage = () => {
+  const { cart } = useContext(CartContext);
   const [cartProduct, setCartProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const bigPromise = Object.keys(cartProductCount).map((e) =>
-      getProductsDetail(e)
-    );
+    const bigPromise = Object.keys(cart).map((e) => getProductsDetail(e));
     Promise.all(bigPromise).then((response) => {
       setLoading(false);
       setCartProduct(response);
@@ -29,8 +29,6 @@ const CartPage = ({ cartProductCount }) => {
           ) : (
             <CartList
               setCartProduct={setCartProduct}
-            
-              productTotalCount={cartProductCount}
               cartProduct={cartProduct}
             />
           )}
