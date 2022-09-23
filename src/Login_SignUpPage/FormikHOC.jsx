@@ -2,10 +2,9 @@ import { useField } from "formik";
 import React from "react";
 
 const FormikHOC = (Input) => {
-  const FormikCostomizedInput = ({ name, ...rest }) => {
-    const [{ ...data }, { error, touched }] = useField(name);
-    return <Input {...rest} {...data} error={error} touched={touched} />;
+  return ({ name, ...rest }) => {
+    const [{ ...data }, { ...meta }] = useField(name);
+    return <Input {...rest} {...data} {...meta} />;
   };
-  return FormikCostomizedInput;
 };
 export default FormikHOC;
