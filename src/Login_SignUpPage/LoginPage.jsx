@@ -11,7 +11,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { useMemo } from "react";
-import Input from "./Input";
+import {  FormikInput } from "./Input";
 
 const LoginPage = () => {
   const [visiblePswd, setVisiblePswd] = useState(false);
@@ -37,7 +37,7 @@ const LoginPage = () => {
   });
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center my-28">
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg ">
         <div className="flex  w-full items-center justify-between">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
@@ -60,7 +60,7 @@ const LoginPage = () => {
         >
           {({ isValid }) => (
             <Form className="mt-4 space-y-6">
-              <Input
+              <FormikInput
                 icon={<AiOutlineMail />}
                 name="email"
                 type="email"
@@ -69,7 +69,7 @@ const LoginPage = () => {
                 placeholder="Email"
                 required={true}
               />
-              <Input
+              <FormikInput
                 icon={<RiLockPasswordLine />}
                 name="password"
                 label="Password"

@@ -8,9 +8,9 @@ import {
 } from "react-icons/ai";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { RiLockPasswordLine } from "react-icons/ri";
-import Input from "./Input";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { FormikInput } from "./Input";
 
 const SignUpPage = () => {
   const [visiblePswd, setVisiblePswd] = useState(false);
@@ -45,7 +45,7 @@ const SignUpPage = () => {
   });
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center my-24">
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg ">
         <div className="flex  w-full items-center justify-between">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
@@ -71,7 +71,7 @@ const SignUpPage = () => {
           {({ isValid }) => (
             <Form className="mt-4 space-y-6">
               <div className="space-y-5">
-                <Input
+                <FormikInput
                   name="name"
                   icon={<AiOutlineUser />}
                   label="Name"
@@ -81,7 +81,7 @@ const SignUpPage = () => {
                   required={true}
                   placeholder="Name"
                 />
-                <Input
+                <FormikInput
                   id="email"
                   icon={<AiOutlineMail />}
                   label="Email"
@@ -91,7 +91,7 @@ const SignUpPage = () => {
                   required={true}
                   placeholder="Email Address"
                 />
-                <Input
+                <FormikInput
                   id="password"
                   icon={<RiLockPasswordLine />}
                   label="Create Password"
@@ -121,7 +121,7 @@ const SignUpPage = () => {
                   }
                 />
 
-                <Input
+                <FormikInput
                   id="password"
                   icon={<RiLockPasswordLine />}
                   label="Confirm Password"

@@ -1,12 +1,27 @@
 import React from "react";
+import { useState } from "react";
+import { useContext } from "react";
 import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
+import { CartContext } from "../App";
 
-const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProduct}) => {
- const productQuantity = productTotalCount[id];
- const onCross = () =>{
-  removeCartProduct(id)
- }
+const CartRow = ({
+  price,
+  thumbnail,
+  title,
+  id,
+  removeCartProduct,
+}) => {
+  const { cart } = useContext(CartContext);
+  console.log(cart);
+  let productQuantity = cart[id];
+  const [quantity, setQuantity] = useState(productQuantity);
+  
+
+
+  const onCross = () => {
+    removeCartProduct(id);
+  };
   return (
     <div className="lg:border-t lg:border-gray-300">
       <div className="w-full flex flex-col lg:flex-row items-center lg:p-4 ">
@@ -45,7 +60,15 @@ const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProd
           </h1>
           <input
             type="number"
-            value={productQuantity}
+            value={quantity}
+            onChange={(event) => {
+              if (quantity > 0) {
+                setQuantity(event.target.value);
+              } else {
+                setQuantity(1);
+                return;
+              }
+            }}
             className="p-1 border border-gray-500 outline-none text-center w-14 bg-transparent font-poppins text-gray-500"
           ></input>
         </div>
@@ -54,7 +77,7 @@ const CartRow = ({price, thumbnail, title, id, productTotalCount, removeCartProd
             Subtotal:
           </h1>
           <h1 className="font-bold text-gray-500 text-right w-full lg:w-[10%] lg:text-left">
-            ${price*productQuantity}
+            ${price * productQuantity}
           </h1>
         </div>
       </div>
