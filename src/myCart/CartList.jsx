@@ -16,7 +16,7 @@ const CartList = ({ cartProduct, setCartProduct }) => {
 
 
   return (
-    <div className="border-x lg:border  border-gray-300">
+    <div className="border-x border  border-gray-300">
       <div className="lg:flex items-center w-full p-4 hidden ">
         <span className="w-[25%]"></span>
         <h1 className="w-[35%] font-bold text-gray-600">Product</h1>

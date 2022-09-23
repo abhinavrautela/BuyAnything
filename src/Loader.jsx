@@ -3,8 +3,8 @@ function Loader({size}) {
      let mySize = "w-[40%] sm:w-[30%] h-56"
      let myClass = "min-h-screen my-40"
     if(size == "small"){
-        mySize = "w-full"
-        myClass = "h-max mx-auto"
+        mySize = "w-full "
+        myClass = "h-96 flex items-center lg:block lg:h-max lg:mx-auto "
     }
      if (size == "xs") {
        mySize = "w-full h-48";
@@ -12,7 +12,7 @@ function Loader({size}) {
      }
     return (
        
-        <div className={myClass}>
+        <div className={myClass }>
      <img className={mySize + " object-cover mx-auto"} src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
        </div>
     );
