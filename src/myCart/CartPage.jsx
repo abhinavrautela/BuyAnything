@@ -2,8 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import CartList from "./CartList";
 import CartTotal from "./CartTotal";
 import { getProductsDetail } from "../api";
-import { Link } from "react-router-dom";
-import { RiHomeLine } from "react-icons/ri";
 import Loader from "../Loader";
 import { CartContext } from "../App";
 
@@ -33,11 +31,6 @@ const CartPage = () => {
             />
           )}
           <CartTotal />
-        </div>
-        <div className="rounded-full  hover:bg-gray-200 absolute -mt-12 text-gray-400 hover:text-gray-700">
-          <Link to="/">
-            <RiHomeLine size={20} />
-          </Link>
         </div>
       </div>
     </div>

@@ -92,7 +92,7 @@ const SignUpPage = () => {
                   placeholder="Email Address"
                 />
                 <FormikInput
-                  id="password"
+                  id="create password"
                   icon={<RiLockPasswordLine />}
                   label="Create Password"
                   name="create_password"
@@ -122,7 +122,7 @@ const SignUpPage = () => {
                 />
 
                 <FormikInput
-                  id="password"
+                  id="confirm password"
                   icon={<RiLockPasswordLine />}
                   label="Confirm Password"
                   name="confirm_password"

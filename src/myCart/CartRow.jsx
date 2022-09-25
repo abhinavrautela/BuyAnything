@@ -1,27 +1,31 @@
 import React from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { CartContext } from "../App";
 
-const CartRow = ({
-  price,
-  thumbnail,
-  title,
-  id,
-  removeCartProduct,
-}) => {
+const CartRow = ({ price, thumbnail, title, id, removeCartProduct, xyz }) => {
   const { cart } = useContext(CartContext);
-  console.log(cart);
   let productQuantity = cart[id];
   const [quantity, setQuantity] = useState(productQuantity);
-  
-
-
+  const { getId, setQuantityHandler, setDisabled} = xyz;
   const onCross = () => {
     removeCartProduct(id);
   };
+
+  useEffect(() => {
+    if (productQuantity === 0) {
+      removeCartProduct(id);
+    }
+  }, [productQuantity]);
+
+  useEffect(() => {
+    setQuantityHandler(quantity);
+    getId(id);
+    setDisabled(false);
+  }, [quantity]);
   return (
     <div className="lg:border-t lg:border-gray-300">
       <div className="w-full flex flex-col lg:flex-row items-center lg:p-4 ">
@@ -66,7 +70,6 @@ const CartRow = ({
                 setQuantity(event.target.value);
               } else {
                 setQuantity(1);
-                return;
               }
             }}
             className="p-1 border border-gray-500 outline-none text-center w-14 bg-transparent font-poppins text-gray-500"
