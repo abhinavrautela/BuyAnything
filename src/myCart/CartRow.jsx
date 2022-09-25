@@ -6,11 +6,12 @@ import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { CartContext } from "../App";
 
-const CartRow = ({ price, thumbnail, title, id, removeCartProduct, xyz }) => {
+const CartRow = ({ price, thumbnail, title, id, removeCartProduct, upadateCartHooks }) => {
   const { cart } = useContext(CartContext);
   let productQuantity = cart[id];
   const [quantity, setQuantity] = useState(productQuantity);
-  const { getId, setQuantityHandler, setDisabled} = xyz;
+ 
+  const { getId, setQuantityHandler, setDisabled} = upadateCartHooks;
   const onCross = () => {
     removeCartProduct(id);
   };
@@ -24,7 +25,9 @@ const CartRow = ({ price, thumbnail, title, id, removeCartProduct, xyz }) => {
   useEffect(() => {
     setQuantityHandler(quantity);
     getId(id);
-    setDisabled(false);
+    if(quantity != productQuantity){
+      setDisabled(false)
+    }
   }, [quantity]);
   return (
     <div className="lg:border-t lg:border-gray-300">

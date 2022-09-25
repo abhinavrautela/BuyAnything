@@ -7,8 +7,8 @@ import { CartContext } from "../App";
 const CartList = ({ cartProduct, setCartProduct }) => {
   const [quantityHandler, setQuantityHandler] = useState(0);
   const [id, getId] = useState(0);
-  const [disabled, setDisabled] = useState(false);
-  const xyz = { getId, setQuantityHandler, setDisabled };
+  const [disabled, setDisabled] = useState(true);
+  const cartHooks = { getId, setQuantityHandler, setDisabled };
   const { setCart } = useContext(CartContext);
   const removeProduct = (id) => {
     const mylocalStorage = JSON.parse(localStorage.getItem("my-cart"));
@@ -47,7 +47,7 @@ const CartList = ({ cartProduct, setCartProduct }) => {
               <CartRow
                 {...e.data}
                 removeCartProduct={removeProduct}
-                xyz={xyz}
+                upadateCartHooks={cartHooks}
               />
             ))}
           </div>
@@ -72,7 +72,7 @@ const CartList = ({ cartProduct, setCartProduct }) => {
           <Button
             onButtonClick={onhandleUpdateCart}
             myClass={
-              " tracking-wide w-full lg:px-16 lg:py-2  font-bold  disabled:opacity-60 disabled:hover:bg-gray-200 disabled:hover:text-gray-600 "
+              " tracking-wide w-full lg:px-16 lg:py-2  font-bold  disabled:opacity-60 disabled:hover:bg-gray-200 disabled:hover:text-gray-600 disabled:cursor-not-allowed"
             }
             disabled={disabled}
           >
