@@ -6,12 +6,19 @@ import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { CartContext } from "../App";
 
-const CartRow = ({ price, thumbnail, title, id, removeCartProduct, upadateCartHooks }) => {
+const CartRow = ({
+  price,
+  thumbnail,
+  title,
+  id,
+  removeCartProduct,
+  upadateCartHooks,
+}) => {
   const { cart } = useContext(CartContext);
   let productQuantity = cart[id];
   const [quantity, setQuantity] = useState(productQuantity);
- 
-  const { getId, setQuantityHandler, setDisabled} = upadateCartHooks;
+
+  const { getId, setQuantityHandler, setDisabled } = upadateCartHooks;
   const onCross = () => {
     removeCartProduct(id);
   };
@@ -25,8 +32,8 @@ const CartRow = ({ price, thumbnail, title, id, removeCartProduct, upadateCartHo
   useEffect(() => {
     setQuantityHandler(quantity);
     getId(id);
-    if(quantity != productQuantity){
-      setDisabled(false)
+    if (quantity != productQuantity) {
+      setDisabled(false);
     }
   }, [quantity]);
   return (
@@ -68,13 +75,8 @@ const CartRow = ({ price, thumbnail, title, id, removeCartProduct, upadateCartHo
           <input
             type="number"
             value={quantity}
-            onChange={(event) => {
-              if (quantity > 0) {
-                setQuantity(event.target.value);
-              } else {
-                setQuantity(1);
-              }
-            }}
+            onChange={ (event) => setQuantity(event.target.value) }
+            min="0"
             className="p-1 border border-gray-500 outline-none text-center w-14 bg-transparent font-poppins text-gray-500"
           ></input>
         </div>
