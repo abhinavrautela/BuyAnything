@@ -1,7 +1,5 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { CartContext } from "../App";
@@ -24,7 +22,7 @@ const CartRow = ({
   };
 
   useEffect(() => {
-    if (productQuantity === 0) {
+    if (productQuantity == 0) {
       removeCartProduct(id);
     }
   }, [productQuantity]);
@@ -75,7 +73,7 @@ const CartRow = ({
           <input
             type="number"
             value={quantity}
-            onChange={ (event) => setQuantity(event.target.value) }
+            onChange={(event) => setQuantity(event.target.value)}
             min="0"
             className="p-1 border border-gray-500 outline-none text-center w-14 bg-transparent font-poppins text-gray-500"
           ></input>

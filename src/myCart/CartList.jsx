@@ -40,7 +40,7 @@ const CartList = ({ cartProduct, setCartProduct }) => {
         <h1 className="w-[10%] font-bold text-gray-600">Subtotal</h1>
       </div>
 
-      <div>
+      
         {cartProduct.length > 0 ? (
           <div>
             {cartProduct.map((e) => (
@@ -54,7 +54,7 @@ const CartList = ({ cartProduct, setCartProduct }) => {
         ) : (
           <EmptyCart />
         )}
-      </div>
+      
       <div className="flex flex-col gap-1 lg:flex-row w-full justify-between items-center p-5">
         <div className="w-full lg:w-auto">
           <h1 className="flex justify-between gap-2">
