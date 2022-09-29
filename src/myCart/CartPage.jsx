@@ -4,6 +4,7 @@ import CartTotal from "./CartTotal";
 import { getProductsDetail } from "../api";
 import Loader from "../Loader";
 import { CartContext } from "../App";
+import EmptyCart from "./EmptyCart";
 
 const CartPage = () => {
   const { cart } = useContext(CartContext);
@@ -18,11 +19,12 @@ const CartPage = () => {
     });
   }, []);
 
+  
   return (
     <div className="px-[10%] sm:px-[20%]">
       <div className="px-10 py-20 bg-white flex justify-end ">
         <div className="w-full">
-          {loading ? (
+          { loading ? (
             <Loader size={"xs"} />
           ) : (
             <CartList
