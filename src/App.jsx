@@ -6,7 +6,7 @@ import FrontPage from "./FrontPage";
 import Discription from "./productDetailsComp/Description";
 import CartPage from "./myCart/CartPage";
 import SignUpPage from "./Login_SignUpPage/SignUpPage";
-import LoginPage from "./Login_SignUpPage/LoginPage";
+import LoginPage, { EnhancedLogin } from "./Login_SignUpPage/LoginPage";
 import ForgotPswdPage from "./Login_SignUpPage/ForgotPswdPage";
 import AboutUs from "./TnC_AboutUs/AboutUs";
 export const CartContext = createContext();
@@ -61,7 +61,7 @@ function App() {
             }
           />
           <Route path="/signUpPage" element={<SignUpPage />} />
-          <Route path="/logInPage" element={<LoginPage />} />
+          <Route path="/logInPage" element={<EnhancedLogin />} />
           <Route path="/forgetPswd" element={<ForgotPswdPage />} />
           <Route path="/aboutus" element={<AboutUs />} />
         </Route>

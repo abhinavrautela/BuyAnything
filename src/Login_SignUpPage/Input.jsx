@@ -3,11 +3,12 @@ import FormikHOC from "./FormikHOC";
 
 const Input = ({
   id,
-  error,
   icon,
   label,
+  values,
   inputPswdLogic,
   touched,
+  error,
   ...rest
 }) => {
   let borderClass = "border-gray-500";
@@ -24,6 +25,7 @@ const Input = ({
         </label>
         <input
           id={id}
+          value={values}
           {...rest}
           className="relative block w-full appearance-none  bg-transparent  text-gray-900 placeholder-gray-500 focus:z-10 focus:outline-none placeholder:text-xs md:placeholder:text-base sm:text-sm"
         />
