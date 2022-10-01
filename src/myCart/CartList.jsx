@@ -6,7 +6,7 @@ import { CartContext } from "../App";
 
 const CartList = ({ cartProduct, setCartProduct }) => {
   const [disabled, setDisabled] = useState(true);
-  const [localCart, setLocalCart] = useState({});
+  const [localCart, setLocalCart] = useState(cart);
   const cartHooks = { setDisabled };
   const { cart, setCart } = useContext(CartContext);
   const removeProduct = (id) => {
