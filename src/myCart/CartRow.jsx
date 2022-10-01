@@ -11,16 +11,15 @@ const CartRow = ({
   id,
   removeCartProduct,
   upadateCartHooks,
+  updateLocalCart,
 }) => {
   const { cart } = useContext(CartContext);
   let productQuantity = cart[id];
+  const { setDisabled } = upadateCartHooks
   const [quantity, setQuantity] = useState(productQuantity);
-
-  const { getId, setQuantityHandler, setDisabled } = upadateCartHooks;
   const onCross = () => {
     removeCartProduct(id);
   };
-
   useEffect(() => {
     if (productQuantity == 0) {
       removeCartProduct(id);
@@ -28,8 +27,7 @@ const CartRow = ({
   }, [productQuantity]);
 
   useEffect(() => {
-    setQuantityHandler(quantity);
-    getId(id);
+    updateLocalCart(id, quantity)
     if (quantity != productQuantity) {
       setDisabled(false);
     }
