@@ -35,8 +35,6 @@ const LoginPage = ({
   handleChange,
   handleBlur,
 }) => {
-
-  console.log("touched", touched, "errors", errors);
   const [visiblePswd, setVisiblePswd] = useState(false);
   const [type, setType] = useState("");
   useMemo(() => {

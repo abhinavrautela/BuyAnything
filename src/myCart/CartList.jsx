@@ -5,11 +5,10 @@ import EmptyCart from "./EmptyCart";
 import { CartContext } from "../App";
 
 const CartList = ({ cartProduct, setCartProduct }) => {
-  const [quantityHandler, setQuantityHandler] = useState(0);
-  const [id, getId] = useState(0);
   const [disabled, setDisabled] = useState(true);
-  const cartHooks = { getId, setQuantityHandler, setDisabled };
-  const { setCart } = useContext(CartContext);
+  const [localCart, setLocalCart] = useState({});
+  const cartHooks = { setDisabled };
+  const { cart, setCart } = useContext(CartContext);
   const removeProduct = (id) => {
     const mylocalStorage = JSON.parse(localStorage.getItem("my-cart"));
     const { [id]: deletedItem, ...rest } = mylocalStorage;
@@ -18,18 +17,19 @@ const CartList = ({ cartProduct, setCartProduct }) => {
     setCartProduct(cartProduct.filter((e) => e.data.id != id));
   };
 
-  const handleUpdateCart = (id, newQuantity) => {
-    let mylocalStorage = JSON.parse(localStorage.getItem("my-cart"));
-    mylocalStorage = { ...mylocalStorage, [id]: +newQuantity };
-    setCart(mylocalStorage);
-    console.log("mylocalStorage", mylocalStorage);
-    localStorage.setItem("my-cart", JSON.stringify(mylocalStorage));
+  const handleUpdateCart = (updatedCartObject) => {
+    console.log("handleUpdateCart", updatedCartObject);
+    setCart(updatedCartObject);
+   localStorage.setItem("my-cart", JSON.stringify(updatedCartObject));
+  };
+  const updateLocalCart = (id, quantity) => {
+    setLocalCart({ ...localCart, [id]: +quantity });
+    console.log("localCart", localCart);
   };
   const onhandleUpdateCart = () => {
-    handleUpdateCart(id, quantityHandler);
+    handleUpdateCart(localCart);
     setDisabled(true);
   };
-
   return (
     <div className="border-x border  border-gray-300">
       <div className="lg:flex items-center w-full p-4 hidden ">
@@ -40,21 +40,22 @@ const CartList = ({ cartProduct, setCartProduct }) => {
         <h1 className="w-[10%] font-bold text-gray-600">Subtotal</h1>
       </div>
 
-      
-        {cartProduct.length > 0 ? (
-          <div>
-            {cartProduct.map((e) => (
-              <CartRow
-                {...e.data}
-                removeCartProduct={removeProduct}
-                upadateCartHooks={cartHooks}
-              />
-            ))}
-          </div>
-        ) : (
-          <EmptyCart />
-        )}
-      
+      {cartProduct.length > 0 ? (
+        <div>
+          {cartProduct.map((e) => (
+            <CartRow
+              key={e.data.id}
+              {...e.data}
+              updateLocalCart={updateLocalCart}
+              removeCartProduct={removeProduct}
+              upadateCartHooks={cartHooks}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyCart />
+      )}
+
       <div className="flex flex-col gap-1 lg:flex-row w-full justify-between items-center p-5">
         <div className="w-full lg:w-auto">
           <h1 className="flex justify-between gap-2">
