@@ -5,10 +5,11 @@ import EmptyCart from "./EmptyCart";
 import { CartContext } from "../App";
 
 const CartList = ({ cartProduct, setCartProduct }) => {
+  const { cart , setCart } = useContext(CartContext);
   const [disabled, setDisabled] = useState(true);
   const [localCart, setLocalCart] = useState(cart);
   const cartHooks = { setDisabled };
-  const { cart, setCart } = useContext(CartContext);
+
   const removeProduct = (id) => {
     const mylocalStorage = JSON.parse(localStorage.getItem("my-cart"));
     const { [id]: deletedItem, ...rest } = mylocalStorage;
@@ -20,7 +21,7 @@ const CartList = ({ cartProduct, setCartProduct }) => {
   const handleUpdateCart = (updatedCartObject) => {
     console.log("handleUpdateCart", updatedCartObject);
     setCart(updatedCartObject);
-   localStorage.setItem("my-cart", JSON.stringify(updatedCartObject));
+    localStorage.setItem("my-cart", JSON.stringify(updatedCartObject));
   };
   const updateLocalCart = (id, quantity) => {
     setLocalCart({ ...localCart, [id]: +quantity });
