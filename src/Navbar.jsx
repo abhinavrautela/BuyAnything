@@ -42,7 +42,7 @@ function Navbar() {
           <Button
             onButtonClick={() => {
               setUser(undefined);
-              localStorage.removeItem("token");
+              localStorage.removeItem("MyToken");
             }}
             myClass="lg:text-xs hover:underline opacity-50 hover:opacity-80"
           >
