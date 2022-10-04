@@ -37,7 +37,7 @@ const LoginPage = ({
   handleBlur,
 }) => {
   const [visiblePswd, setVisiblePswd] = useState(false);
-  
+
   const [type, setType] = useState("");
   useMemo(() => {
     if (visiblePswd) {
@@ -49,7 +49,7 @@ const LoginPage = ({
 
   return (
     <div className="flex flex-col justify-center items-center h-screen space-y-1">
-     {error && <Error loginError/>}
+      {error && <Error loginError />}
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg ">
         <div className="flex  w-full items-center justify-between">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
@@ -150,14 +150,16 @@ export const EnhancedLogin = withFormik({
         password: values.password,
       })
       .then((response) => {
-        console.log("then")
+        console.log("then");
         props.setUser(response.data.user);
         localStorage.setItem("token", response.data.token);
-        props.setError(false)
+        props.setError(false);
       })
-      .catch((error)=>{if(error){
-        props.setError(true)
-      }});
+      .catch((error) => {
+        if (error) {
+          props.setError(true);
+        }
+      });
   },
   validateOnMount: true,
   validationSchema: schema,

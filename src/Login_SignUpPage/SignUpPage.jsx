@@ -70,7 +70,7 @@ const SignUpPage = () => {
     <div className="flex flex-col justify-center items-center h-screen space-y-1">
       {error && <Error signupError />}
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg ">
-        <div className="flex  w-full items-center justify-between">
+        <div className="w-full ">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
             Get On Board
           </h1>
