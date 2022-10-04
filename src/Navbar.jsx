@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
+import { MdAccountCircle } from "react-icons/md";
 import { CgMenuRight } from "react-icons/cg";
 import { useMemo } from "react";
 import { NevbarCountContext } from "./App";
@@ -25,8 +26,9 @@ function Navbar() {
         src="https://s3-ap-southeast-1.amazonaws.com/p2swebsite/images/smeKhabar/news/amazon_1618225124036_113.jpg"
         className="h-12 w-24"
       />
+
       <div className="hidden lg:flex items-center space-x-3 ">
-        <div className="space-x-5 font-thin  flex ">
+        <div className="space-x-5 font-thin flex items-center">
           <Link to="/">
             <h1 className="hover:text-primary ease-in-out duration-300 hover:underline hover:scale-105 ">
               Home
@@ -42,9 +44,16 @@ function Navbar() {
               setUser(undefined);
               localStorage.removeItem("token");
             }}
+            myClass="lg:text-xs hover:underline"
           >
             LogOUT
           </Button>
+          <h1 className="capitalize font-poppins bg-purple-100 rounded-lg p-1 text-purple-900 flex items-center opacity-50 hover:opacity-100 cursor-not-allowed">
+            <MdAccountCircle size={16} />
+            <span className="font-bold text-purple-500 text-xs underline ml-1">
+              {user.full_name}
+            </span>
+          </h1>
         </div>
         <Link to="/cart">
           <div
@@ -103,8 +112,14 @@ function Navbar() {
               Home
             </Link>
             <Link to="/aboutus">AboutUS</Link>
-            <Link to="/loginpage">LogIN</Link>
-            <Link to="/signuppage">SignUp</Link>
+            <button
+              onClick={() => {
+                setUser(undefined);
+                localStorage.removeItem("token");
+              }}
+            >
+              LogOut
+            </button>
           </div>
         </div>
       </div>

@@ -158,6 +158,7 @@ export const EnhancedLogin = withFormik({
         console.log("then")
         props.setUser(response.data.user);
         localStorage.setItem("token", response.data.token);
+        props.setError(false)
       })
       .catch((error)=>{if(error){
         props.setError(true)

@@ -44,6 +44,7 @@ const SignUpPage = () => {
       .then((response) => {
         setUser(response.data.user);
         localStorage.setItem("token", response.data.token);
+        setError(false)
       })
       .catch((error)=> {if(error){
          setError(true)
