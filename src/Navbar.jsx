@@ -121,7 +121,7 @@ function Navbar() {
             <button
               onClick={() => {
                 setUser(undefined);
-                localStorage.removeItem("token");
+                localStorage.removeItem("MyToken");
               }}
             >
               LogOut

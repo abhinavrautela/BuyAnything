@@ -28,7 +28,7 @@ function App() {
   const [user, setUser] = useState();
   const [error, setError] = useState(false);
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("MyToken");
     if (token) {
       axios
         .get("https://myeasykart.codeyogi.io/me", {

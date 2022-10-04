@@ -42,7 +42,7 @@ const SignUpPage = () => {
       })
       .then((response) => {
         setUser(response.data.user);
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("MyToken", response.data.token);
         setError(false);
       })
       .catch((error) => {
