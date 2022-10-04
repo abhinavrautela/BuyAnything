@@ -150,7 +150,6 @@ export const EnhancedLogin = withFormik({
         password: values.password,
       })
       .then((response) => {
-        console.log("then");
         props.setUser(response.data.user);
         localStorage.setItem("MyToken", response.data.token);
         props.setError(false);

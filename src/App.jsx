@@ -42,7 +42,6 @@ function App() {
         });
     } else setUserLoading(false);
   }, []);
-  console.log("user", user);
   const userData = { user, setUser };
   const cartData = { cart, setCart };
   const handleAddToCart = (productId, count) => {
