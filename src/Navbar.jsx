@@ -44,11 +44,11 @@ function Navbar() {
               setUser(undefined);
               localStorage.removeItem("token");
             }}
-            myClass="lg:text-xs hover:underline"
+            myClass="lg:text-xs hover:underline opacity-50 hover:opacity-80"
           >
             LogOUT
           </Button>
-          <h1 className="capitalize font-poppins bg-purple-100 rounded-lg p-1 text-purple-900 flex items-center opacity-50 hover:opacity-100 cursor-not-allowed">
+          <h1 className="capitalize font-poppins  bg-purple-100 rounded-lg p-1 text-purple-900 flex items-center opacity-50 hover:opacity-100 cursor-not-allowed">
             <MdAccountCircle size={16} />
             <span className="font-bold text-purple-500 text-xs underline ml-1">
               {user.full_name}
@@ -108,6 +108,12 @@ function Navbar() {
                 : "w-1 h-1 p-0 -m-1 overflow-hidden ease-out duration-300 absolute"
             }
           >
+            <h1 className="capitalize font-poppins  flex items-center cursor-not-allowed">
+              <MdAccountCircle size={10} />
+              <span className="font-bold text-purple-500 text-xs underline ml-1 tracking-tighter">
+                {user.full_name}
+              </span>
+            </h1>
             <Link to="/" className="hover:text-primary ">
               Home
             </Link>

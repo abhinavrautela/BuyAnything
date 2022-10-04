@@ -61,7 +61,7 @@ function App() {
     [cart]
   );
   if(userLoading){
-    return <Loader m/>
+    return <Loader size={"full"}/>
   }
   return (
     <div>

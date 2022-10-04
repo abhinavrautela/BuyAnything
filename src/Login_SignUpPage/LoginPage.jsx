@@ -5,6 +5,7 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineEye,
 } from "react-icons/ai";
+
 import { RiLockPasswordLine } from "react-icons/ri";
 import { withFormik } from "formik";
 import * as Yup from "yup";
@@ -52,7 +53,7 @@ const LoginPage = ({
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg ">
         <div className="flex  w-full items-center justify-between">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
-            Hello there, welcome back
+            Hello there, Welcome
           </h1>
         </div>
         <form onSubmit={handleSubmit} className="mt-4 space-y-6">
