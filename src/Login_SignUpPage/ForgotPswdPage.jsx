@@ -55,7 +55,7 @@ const ForgotPswdPage = () => {
                 <div className="hidden md:block"></div>
                 <div className="text-sm">
                   <Link
-                    to="/logInPage"
+                    to="/login"
                     className="font-poppins text-gray-400 hover:text-primary"
                   >
                     Back To LogIn
