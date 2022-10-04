@@ -6,7 +6,7 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineEye,
 } from "react-icons/ai";
-import { IoIosArrowRoundBack } from "react-icons/io";
+
 import { RiLockPasswordLine } from "react-icons/ri";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -15,10 +15,9 @@ import axios from "axios";
 import { UserDetailContext } from "../App";
 import Error from "./Error";
 
-
 const SignUpPage = () => {
   const { setUser } = useContext(UserDetailContext);
-  const [ error, setError ] = useState(false)
+  const [error, setError] = useState(false);
   const [visiblePswd, setVisiblePswd] = useState(false);
   const [type, setType] = useState("");
   useEffect(() => {
@@ -44,11 +43,13 @@ const SignUpPage = () => {
       .then((response) => {
         setUser(response.data.user);
         localStorage.setItem("token", response.data.token);
-        setError(false)
+        setError(false);
       })
-      .catch((error)=> {if(error){
-         setError(true)
-      }});
+      .catch((error) => {
+        if (error) {
+          setError(true);
+        }
+      });
   };
 
   const schema = Yup.object().shape({
@@ -73,11 +74,6 @@ const SignUpPage = () => {
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
             Get On Board
           </h1>
-          <div className="rounded-full text-base md:text-lg text-gray-700 border border-gray-700 inline-block opacity-60 hover:opacity-100 bg-transparent ">
-            <Link to="/">
-              <IoIosArrowRoundBack />
-            </Link>
-          </div>
         </div>
         <Formik
           initialValues={{

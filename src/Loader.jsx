@@ -10,6 +10,10 @@ function Loader({size}) {
        mySize = "w-full h-48";
        myClass = "w-[20%] mx-auto my-auto ";
      }
+     if (size == "full"){
+      myClass="h-screen bg-gray-100 justify-center bg-gray-50"
+      mySize = "w-[40%] sm:w-[30%] pt-56";
+     }
     return (
        
         <div className={myClass }>
