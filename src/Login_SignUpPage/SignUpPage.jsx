@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   AiOutlineUser,
@@ -11,11 +11,17 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FormikInput } from "./Input";
+import axios from "axios";
+import { UserDetailContext } from "../App";
+import Error from "./Error";
+
 
 const SignUpPage = () => {
+  const { setUser } = useContext(UserDetailContext);
+  const [ error, setError ] = useState(false)
   const [visiblePswd, setVisiblePswd] = useState(false);
   const [type, setType] = useState("");
-  useMemo(() => {
+  useEffect(() => {
     if (visiblePswd) {
       setType("text");
     } else {
@@ -29,6 +35,19 @@ const SignUpPage = () => {
       values.name,
       values.create_password
     );
+    axios
+      .post("https://myeasykart.codeyogi.io/signup", {
+        fullName: values.name,
+        email: values.email,
+        password: values.confirm_password,
+      })
+      .then((response) => {
+        setUser(response.data.user);
+        localStorage.setItem("token", response.data.token);
+      })
+      .catch((error)=> {if(error){
+         setError(true)
+      }});
   };
 
   const schema = Yup.object().shape({
@@ -41,11 +60,13 @@ const SignUpPage = () => {
     confirm_password: Yup.string()
       .required("required")
       .min(8, "at least 8 characters")
-      .max(12, "at most 12 characters"),
+      .max(12, "at most 12 characters")
+      .oneOf([Yup.ref("create_password"), null], "Passwords must match"),
   });
 
   return (
-    <div className="flex justify-center items-center my-24">
+    <div className="flex flex-col justify-center items-center h-screen space-y-1">
+      {error && <Error signupError />}
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg ">
         <div className="flex  w-full items-center justify-between">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
@@ -77,7 +98,7 @@ const SignUpPage = () => {
                   label="Name"
                   id="name"
                   type="text"
-                  autocomplete="name"
+                  autoComplete="name"
                   required={true}
                   placeholder="Name"
                 />
@@ -87,7 +108,7 @@ const SignUpPage = () => {
                   label="Email"
                   name="email"
                   type="email"
-                  autocomplete="email"
+                  autoComplete="email"
                   required={true}
                   placeholder="Email Address"
                 />
@@ -97,7 +118,7 @@ const SignUpPage = () => {
                   label="Create Password"
                   name="create_password"
                   type={type}
-                  autocomplete="password"
+                  autoComplete="password"
                   required={true}
                   placeholder="Create Password"
                   inputPswdLogic={
@@ -127,7 +148,7 @@ const SignUpPage = () => {
                   label="Confirm Password"
                   name="confirm_password"
                   type="password"
-                  autocomplete="password"
+                  autoComplete="password"
                   required={true}
                   placeholder="Confirm Password"
                 />
@@ -158,7 +179,7 @@ const SignUpPage = () => {
               <div className="text-xs md:text-sm flex lg:w-full lg:justify-center items-center md:space-x-2">
                 <h1 className="text-gray-400">Already a member?</h1>
                 <span className="font-medium text-gray-500 underline hover:text-primary">
-                  <Link to="/logInpage">LogIn</Link>
+                  <Link to="/login">LogIn</Link>
                 </span>
               </div>
             </Form>

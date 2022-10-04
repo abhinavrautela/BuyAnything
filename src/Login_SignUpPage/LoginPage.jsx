@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   AiOutlineMail,
@@ -12,7 +12,9 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { useMemo } from "react";
 import Input from "./Input";
-
+import Error from "./Error";
+import axios from "axios";
+import { UserDetailContext } from "../App";
 
 const schema = Yup.object().shape({
   email: Yup.string().required().email(),
@@ -21,12 +23,11 @@ const schema = Yup.object().shape({
     .min(8, "at least 8 characters")
     .max(12, "at most 12 characters"),
 });
-const onFormSubmit = () => {
-  console.log("request send");
-};
-
 
 const LoginPage = ({
+  setUser,
+  error,
+  setError,
   values,
   isValid,
   errors,
@@ -36,6 +37,7 @@ const LoginPage = ({
   handleBlur,
 }) => {
   const [visiblePswd, setVisiblePswd] = useState(false);
+  
   const [type, setType] = useState("");
   useMemo(() => {
     if (visiblePswd) {
@@ -46,7 +48,8 @@ const LoginPage = ({
   }, [visiblePswd]);
 
   return (
-    <div className="flex justify-center items-center my-28">
+    <div className="flex flex-col justify-center items-center h-screen space-y-1">
+     {error && <Error loginError/>}
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg ">
         <div className="flex  w-full items-center justify-between">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
@@ -68,7 +71,7 @@ const LoginPage = ({
             touched={touched.email}
             name="email"
             type="email"
-            autocomplete="email"
+            autoComplete="email"
             id="email"
             placeholder="Email"
             required={true}
@@ -80,7 +83,7 @@ const LoginPage = ({
             label="Password"
             id="password"
             type={type}
-            autocomplete="password"
+            autoComplete="password"
             required={true}
             placeholder="Password"
             onChange={handleChange}
@@ -143,15 +146,28 @@ const LoginPage = ({
     </div>
   );
 };
- 
-;
+
 export const EnhancedLogin = withFormik({
-  handleSubmit: onFormSubmit,
+  handleSubmit: (values, { props }) => {
+    axios
+      .post("https://myeasykart.codeyogi.io/login", {
+        email: values.email,
+        password: values.password,
+      })
+      .then((response) => {
+        console.log("then")
+        props.setUser(response.data.user);
+        localStorage.setItem("token", response.data.token);
+      })
+      .catch((error)=>{if(error){
+        props.setError(true)
+      }});
+  },
   validateOnMount: true,
   validationSchema: schema,
   initialValues: {
     email: "",
-    password: ""
+    password: "",
   },
 })(LoginPage);
 export default LoginPage;
