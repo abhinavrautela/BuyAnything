@@ -12,12 +12,13 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FormikInput } from "./Input";
 import axios from "axios";
-import { UserDetailContext } from "../App";
-import Error from "./Error";
+import {
+  withAlert,
+  withUser,
+} from "../Alert_User_ContextProvider/withProvider";
+import Alert from "../Alert_User_ContextProvider/Alert";
 
-const SignUpPage = () => {
-  const { setUser } = useContext(UserDetailContext);
-  const [error, setError] = useState(false);
+const SignUpPage = ({ alert, setAlert, setUser }) => {
   const [visiblePswd, setVisiblePswd] = useState(false);
   const [type, setType] = useState("");
   useEffect(() => {
@@ -41,13 +42,13 @@ const SignUpPage = () => {
         password: values.confirm_password,
       })
       .then((response) => {
-        setUser(response.data.user);
         localStorage.setItem("MyToken", response.data.token);
-        setError(false);
+        setUser(response.data.user);
+        setAlert({ type: "success", message: "Thanks For Signing Up" });
       })
       .catch((error) => {
         if (error) {
-          setError(true);
+          setAlert({ type: "error", message: "SignUp Failed" });
         }
       });
   };
@@ -68,7 +69,7 @@ const SignUpPage = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen space-y-1">
-      {error && <Error signupError />}
+      {alert && <Alert />}
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg ">
         <div className="w-full ">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
@@ -187,4 +188,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default withAlert(withUser(SignUpPage));

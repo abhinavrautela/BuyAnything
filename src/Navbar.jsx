@@ -5,12 +5,12 @@ import { MdAccountCircle } from "react-icons/md";
 import { CgMenuRight } from "react-icons/cg";
 import { useMemo } from "react";
 import { NevbarCountContext } from "./App";
-import { UserDetailContext } from "./App";
+import { UserContext } from "./Alert_User_ContextProvider/Contexts";
 import CartOnHover from "./myCart/CartOnHover";
 import Button from "./buttons/Button";
 
 function Navbar() {
-  const { user, setUser } = useContext(UserDetailContext);
+  const { user, setUser } = useContext(UserContext);
   const totalItems = useContext(NevbarCountContext);
   const [navbar, toggalNavbar] = useState(false);
   const [cartOnHover, setCartOnHover] = useState(false);
