@@ -5,8 +5,10 @@ import PageButton from "./buttons/PageButton";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import Loader from "./Loader";
+import Alert from "./Alert_User_ContextProvider/Alert";
 import { getProducts } from "./api.js";
-function FrontPage() {
+import { withAlert } from "./Alert_User_ContextProvider/withProvider";
+function FrontPage({ alert }) {
   const [product, setProduct] = useState([]);
   const [query, setQuery] = useState("");
   const [sortValue, setSortValue] = useState("default");
@@ -26,8 +28,7 @@ function FrontPage() {
     [query, product]
   );
 
-  useMemo(
-    () => {
+  useMemo(() => {
     if (sortValue == "title") {
       data.sort((x, y) => (x.title < y.title ? -1 : 1));
     }
@@ -41,8 +42,12 @@ function FrontPage() {
 
   return (
     <div className="px-[10%] sm:px-[20%] ">
-      <div className="bg-white shadow shadow-gray-50 px-12 py-20 w-full h-full space-y-8 ">
-        <div className="flex justify-between">
+      <div className="bg-white shadow shadow-gray-50 px-12 py-20 lg:py-0 w-full h-full space-y-8">
+        <div className="flex justify-end">
+          {alert ? <Alert /> : <div className="h-8"></div>}
+        </div>
+
+        <div className="flex justify-between w-full">
           <div className="lg:flex lg:items-center border px-3 py-1 rounded-md border-gray-300 hover:border-gray-500 hidden ">
             <input
               value={query}
@@ -67,7 +72,7 @@ function FrontPage() {
           <div className="space-y-28">
             <div className="h-full grid grid-cols-1 sm:grid-cols-3 grid-flow-rows gap-10">
               {data.length > 0 ? (
-                data.map((e) =><Products {...e} key={e.id}/> )
+                data.map((e) => <Products {...e} key={e.id} />)
               ) : (
                 <ProductNotFound />
               )}
@@ -88,4 +93,4 @@ function FrontPage() {
   );
 }
 
-export default FrontPage;
+export default withAlert(FrontPage);

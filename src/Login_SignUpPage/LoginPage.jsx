@@ -12,9 +12,13 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { useMemo } from "react";
 import Input from "./Input";
-import Error from "./Error";
+
 import axios from "axios";
-import { UserDetailContext } from "../App";
+import {
+  withAlert,
+  withUser,
+} from "../Alert_User_ContextProvider/withProvider";
+import Alert from "../Alert_User_ContextProvider/Alert";
 
 const schema = Yup.object().shape({
   email: Yup.string().required().email(),
@@ -24,10 +28,8 @@ const schema = Yup.object().shape({
     .max(12, "at most 12 characters"),
 });
 
-const LoginPage = ({
-  setUser,
-  error,
-  setError,
+export const LoginPage = ({
+  alert,
   values,
   isValid,
   errors,
@@ -49,7 +51,7 @@ const LoginPage = ({
 
   return (
     <div className="flex flex-col justify-center items-center h-screen space-y-1">
-      {error && <Error loginError />}
+      {alert && <Alert />}
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg ">
         <div className="flex  w-full items-center justify-between">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
@@ -142,7 +144,7 @@ const LoginPage = ({
   );
 };
 
-export const EnhancedLogin = withFormik({
+const EnhancedLogin = withFormik({
   handleSubmit: (values, { props }) => {
     axios
       .post("https://myeasykart.codeyogi.io/login", {
@@ -152,11 +154,11 @@ export const EnhancedLogin = withFormik({
       .then((response) => {
         props.setUser(response.data.user);
         localStorage.setItem("MyToken", response.data.token);
-        props.setError(false);
+        props.setAlert({ type: "success", message: "LoggedIn Successfully" });
       })
       .catch((error) => {
         if (error) {
-          props.setError(true);
+          props.setAlert({ type: "error", message: "Invalid" });
         }
       });
   },
@@ -167,4 +169,4 @@ export const EnhancedLogin = withFormik({
     password: "",
   },
 })(LoginPage);
-export default LoginPage;
+export default withAlert(withUser(EnhancedLogin));
