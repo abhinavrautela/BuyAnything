@@ -49,9 +49,7 @@ function App() {
         });
     } else setUserLoading(false);
   }, []);
-  const userData = { user, setUser };
-  const cartData = { cart, setCart };
-  const alertData = { alert, setAlert, removeAlert };
+
 
   const handleAddToCart = (productId, count) => {
     let oldcount = cart[productId] || 0;
@@ -73,8 +71,8 @@ function App() {
   }
   return (
     <div>
-      <UserContext.Provider value={userData}>
-        <AlertContext.Provider value={alertData}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <AlertContext.Provider value={{ alert, setAlert, removeAlert }}>
           <Routes>
             <Route
               path="/"
@@ -98,7 +96,7 @@ function App() {
               <Route
                 path="/cart"
                 element={
-                  <CartContext.Provider value={cartData}>
+                  <CartContext.Provider value={{ cart, setCart }}>
                     <CartPage />
                   </CartContext.Provider>
                 }
