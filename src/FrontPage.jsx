@@ -102,6 +102,7 @@ const  FrontPage = ({ alert }) => {
               {range(paging.range, product.meta.last_page - paging.pages).map(
                 (pageNo) => (
                   <Link
+                    
                     to={`?${new URLSearchParams({ ...params, page: pageNo })}`}
                     className={
                       "font-poppins text-xs py-3 px-4 border border-primary hover:text-white hover:bg-primary flex items-center " +
