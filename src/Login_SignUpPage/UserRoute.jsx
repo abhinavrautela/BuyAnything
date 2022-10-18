@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { withUser } from "../ContextProvider/withProvider";
 
-import { withUser } from "../Alert_User_ContextProvider/withProvider";
-
-const UserRoute = ({ user, children }) => {
-  if (!user) {
-    return <Navigate to="/login" />;
-  } else return children;
+const UserRoute = ({user, isLoggedIn, children }) => {
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return children;
+    } else return <Navigate to="/" />;
+  }, []);
 };
 
 export default withUser(UserRoute);

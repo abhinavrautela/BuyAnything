@@ -15,8 +15,8 @@ import axios from "axios";
 import {
   withAlert,
   withUser,
-} from "../Alert_User_ContextProvider/withProvider";
-import Alert from "../Alert_User_ContextProvider/Alert";
+} from "../ContextProvider/withProvider";
+import Alert from "../ContextProvider/Alert";
 
 const SignUpPage = ({ alert, setAlert, setUser }) => {
   const [visiblePswd, setVisiblePswd] = useState(false);
