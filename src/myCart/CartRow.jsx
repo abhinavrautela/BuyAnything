@@ -2,20 +2,24 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
-import { CartContext } from "../App";
+import { withCart } from "../ContextProvider/withProvider";
 
 const CartRow = ({
+  cart,
   price,
   thumbnail,
   title,
   id,
   removeCartProduct,
   upadateCartHooks,
-  updateLocalCart,
+  updatequantityMap,
 }) => {
-  const { cart } = useContext(CartContext);
-  let productQuantity = cart[id];
-  const { setDisabled } = upadateCartHooks
+  const quantityMap = cart.reduce(
+    (m, cartItem) => ({ ...m, [cartItem.product.id]: cartItem.quantity }),
+    {}
+  );
+  let productQuantity = quantityMap[id];
+  const { setDisabled } = upadateCartHooks;
   const [quantity, setQuantity] = useState(productQuantity);
   const onCross = () => {
     removeCartProduct(id);
@@ -27,7 +31,7 @@ const CartRow = ({
   }, [productQuantity]);
 
   useEffect(() => {
-    updateLocalCart(id, quantity)
+    updatequantityMap(id, quantity);
     if (quantity != productQuantity) {
       setDisabled(false);
     }
@@ -89,4 +93,4 @@ const CartRow = ({
   );
 };
 
-export default CartRow;
+export default withCart(CartRow);

@@ -1,25 +1,24 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Button from '../buttons/Button';
 import { BsDash } from "react-icons/bs";
 import { GrFormAdd } from "react-icons/gr";
-import { CartQuantityContext } from "../App";
+import { withCart } from "../ContextProvider/withProvider";
 
-const ProductQuantity = ({ id }) => {
-  const handleChange = useContext(CartQuantityContext)
-    const [item, setItem] = useState(1);
-    const [disabled, setDisabled] = useState(false);
-    useEffect(() => {
-      if (item <= 1) {
-        setDisabled(true);
-      } else setDisabled(false);
-    }, [item]);
-    useEffect(() => {
-      setItem(1);
-    }, [id]);
-    const onAddToCart = () => {
-      handleChange(id, item);
-      setItem(1);
-    };
+const ProductQuantity = ({ id, addToCart }) => {
+  const [item, setItem] = useState(1);
+  const [disabled, setDisabled] = useState(false);
+  useEffect(() => {
+    if (item <= 1) {
+      setDisabled(true);
+    } else setDisabled(false);
+  }, [item]);
+  useEffect(() => {
+    setItem(1);
+  }, [id]);
+  const onAddToCart = () => {
+    addToCart(id, item);
+    setItem(1);
+  };
   return (
     <div className="flex lg:flex-col xl:flex-row lg:items-start items-center gap-4 ">
       <div className="flex items-center gap-2">
@@ -54,4 +53,4 @@ const ProductQuantity = ({ id }) => {
   );
 };
 
-export default ProductQuantity
+export default withCart(ProductQuantity);

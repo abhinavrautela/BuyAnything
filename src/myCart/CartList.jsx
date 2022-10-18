@@ -1,34 +1,36 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CartRow from "./CartRow";
 import Button from "../buttons/Button";
 import EmptyCart from "./EmptyCart";
-import { CartContext } from "../App";
+import { withCart } from "../ContextProvider/withProvider";
 
-const CartList = ({ cartProduct, setCartProduct }) => {
-  const { cart , setCart } = useContext(CartContext);
+const CartList = ({ cart, updateCart }) => {
   const [disabled, setDisabled] = useState(true);
-  const [localCart, setLocalCart] = useState(cart);
+  const [quantityMap, setQuantityMap] = useState();
   const cartHooks = { setDisabled };
 
-  const removeProduct = (id) => {
-    const mylocalStorage = JSON.parse(localStorage.getItem("my-cart"));
-    const { [id]: deletedItem, ...rest } = mylocalStorage;
-    setCart(rest);
-    localStorage.setItem("my-cart", JSON.stringify(rest));
-    setCartProduct(cartProduct.filter((e) => e.data.id != id));
-  };
+  useEffect(() => setQuantityMap(cartToQuantityMap()), [cart]);
 
-  const handleUpdateCart = (updatedCartObject) => {
-    console.log("handleUpdateCart", updatedCartObject);
-    setCart(updatedCartObject);
-    localStorage.setItem("my-cart", JSON.stringify(updatedCartObject));
+  const cartToQuantityMap = () =>
+    cart.reduce(
+      (m, cartItem) => ({ ...m, [cartItem.product.id]: cartItem.quantity }),
+      {}
+    );
+
+  const removeProduct = (id) => {
+  
+    const newQuantityMap = cartToQuantityMap();
+   delete newQuantityMap[id];
+     updateCart(newQuantityMap);
   };
-  const updateLocalCart = (id, quantity) => {
-    setLocalCart({ ...localCart, [id]: +quantity });
-    console.log("localCart", localCart);
+  const handleUpdateCart = (updatedCartObject) => {
+    updateCart(updatedCartObject);
+  };
+  const updatequantityMap = (id, quantity) => {
+    setQuantityMap({ ...quantityMap, [id]: +quantity });
   };
   const onhandleUpdateCart = () => {
-    handleUpdateCart(localCart);
+    handleUpdateCart(quantityMap);
     setDisabled(true);
   };
   return (
@@ -41,13 +43,13 @@ const CartList = ({ cartProduct, setCartProduct }) => {
         <h1 className="w-[10%] font-bold text-gray-600">Subtotal</h1>
       </div>
 
-      {cartProduct.length > 0 ? (
+      {cart.length > 0 ? (
         <div>
-          {cartProduct.map((e) => (
+          {cart.map((e) => (
             <CartRow
-              key={e.data.id}
-              {...e.data}
-              updateLocalCart={updateLocalCart}
+              key={e.product.id}
+              {...e.product}
+              updatequantityMap={updatequantityMap}
               removeCartProduct={removeProduct}
               upadateCartHooks={cartHooks}
             />
@@ -86,4 +88,4 @@ const CartList = ({ cartProduct, setCartProduct }) => {
   );
 };
 
-export default CartList;
+export default withCart(CartList);

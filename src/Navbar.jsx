@@ -4,14 +4,11 @@ import { FiShoppingCart } from "react-icons/fi";
 import { MdAccountCircle } from "react-icons/md";
 import { CgMenuRight } from "react-icons/cg";
 import { useMemo } from "react";
-import { NevbarCountContext } from "./App";
-import { UserContext } from "./Alert_User_ContextProvider/Contexts";
-import CartOnHover from "./myCart/CartOnHover";
+import { UserContext, CartContext } from "./ContextProvider/Contexts";
 import Button from "./buttons/Button";
+import { withCart, withUser } from "./ContextProvider/withProvider";
 
-function Navbar() {
-  const { user, setUser } = useContext(UserContext);
-  const totalItems = useContext(NevbarCountContext);
+function Navbar({ user, setUser, totalCount }) {
   const [navbar, toggalNavbar] = useState(false);
   const [cartOnHover, setCartOnHover] = useState(false);
   useMemo(() => {
@@ -39,19 +36,31 @@ function Navbar() {
               AboutUS
             </h1>
           </Link>
-          <Button
-            onButtonClick={() => {
-              setUser(undefined);
-              localStorage.removeItem("MyToken");
-            }}
-            myClass="lg:text-xs hover:underline opacity-50 hover:opacity-80"
-          >
-            LogOUT
-          </Button>
+          {user.id ? (
+            <Button
+              onButtonClick={() => {
+                setUser({});
+                localStorage.removeItem("MyToken");
+              }}
+              myClass="lg:text-xs hover:underline opacity-50 hover:opacity-80"
+            >
+              LogOUT
+            </Button>
+          ) : (
+            <Link to="/login">
+              <Button myClass="lg:text-xs hover:underline relative flex justify-end">
+                <span className="absolute -m-3">
+                  
+                  <span class="relative animate-ping inline-flex rounded-full h-3 w-3 bg-orange-900"></span>
+                </span>
+                LogIN
+              </Button>
+            </Link>
+          )}
           <h1 className="capitalize font-poppins  bg-purple-100 rounded-lg p-1 text-purple-900 flex items-center opacity-50 hover:opacity-100 cursor-not-allowed">
             <MdAccountCircle size={16} />
             <span className="font-bold text-purple-500 text-xs underline ml-1">
-              {user.full_name}
+              {user.full_name || "unknown"}
             </span>
           </h1>
         </div>
@@ -63,7 +72,7 @@ function Navbar() {
             <FiShoppingCart size={20} />
             <div className="absolute">
               <h4 className="text-xs w-4 h-4 flex items-center justify-center font-bold text-white  rounded-full bg-primary -m-2 hover:ring-2 hover:ring-primary hover:bg-white hover:text-primary cursor-pointer">
-                {totalItems}
+                {totalCount}
               </h4>
             </div>
             {/* <div
@@ -76,7 +85,7 @@ function Navbar() {
               onMouseLeave={() => setCartOnHover(false)}
             >
               <CartOnHover />
-            </div> */}
+            </div>   */}
           </div>
         </Link>
       </div>
@@ -86,7 +95,7 @@ function Navbar() {
             <FiShoppingCart size={20} />
             <div className="absolute">
               <h4 className="text-xs w-4 h-4 flex items-center justify-center font-bold text-white  rounded-full bg-primary -m-2 hover:ring-2 hover:ring-primary hover:bg-white hover:text-primary cursor-pointer">
-                {totalItems}
+                {totalCount}
               </h4>
             </div>
           </div>
@@ -111,21 +120,27 @@ function Navbar() {
             <h1 className="capitalize font-poppins  flex items-center cursor-not-allowed">
               <MdAccountCircle size={10} />
               <span className="font-bold text-purple-500 text-xs underline ml-1 tracking-tighter">
-                {user.full_name}
+                {user.full_name && "unknown"}
               </span>
             </h1>
             <Link to="/" className="hover:text-primary ">
               Home
             </Link>
             <Link to="/aboutus">AboutUS</Link>
-            <button
-              onClick={() => {
-                setUser(undefined);
-                localStorage.removeItem("MyToken");
-              }}
-            >
-              LogOut
-            </button>
+            {user.id ? (
+              <button
+                onClick={() => {
+                  setUser({ undefined });
+                  localStorage.removeItem("MyToken");
+                }}
+              >
+                LogOut
+              </button>
+            ) : (
+              <Link to="/login">
+                <button>LogIN</button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -133,4 +148,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default withUser(withCart(Navbar));

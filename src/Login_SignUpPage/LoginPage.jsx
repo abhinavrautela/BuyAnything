@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, Navigate } from "react-router-dom";
 import {
   AiOutlineMail,
   AiOutlineEyeInvisible,
@@ -14,11 +14,8 @@ import { useMemo } from "react";
 import Input from "./Input";
 
 import axios from "axios";
-import {
-  withAlert,
-  withUser,
-} from "../Alert_User_ContextProvider/withProvider";
-import Alert from "../Alert_User_ContextProvider/Alert";
+import { withAlert, withUser } from "../ContextProvider/withProvider";
+import Alert from "../ContextProvider/Alert";
 
 const schema = Yup.object().shape({
   email: Yup.string().required().email(),
@@ -29,6 +26,7 @@ const schema = Yup.object().shape({
 });
 
 export const LoginPage = ({
+  user,
   alert,
   values,
   isValid,
@@ -39,7 +37,6 @@ export const LoginPage = ({
   handleBlur,
 }) => {
   const [visiblePswd, setVisiblePswd] = useState(false);
-
   const [type, setType] = useState("");
   useMemo(() => {
     if (visiblePswd) {
@@ -49,9 +46,13 @@ export const LoginPage = ({
     }
   }, [visiblePswd]);
 
+  if (user.id) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="flex flex-col justify-center items-center h-screen space-y-1">
       {alert && <Alert />}
+
       <div className="w-[60%] lg:w-[45%] p-3 md:p-10 bg-gray-50 rounded-md shadow-lg ">
         <div className="flex  w-full items-center justify-between">
           <h1 className="font-thin text-sm md:text-2xl lg:text-4xl text-gray-700">
