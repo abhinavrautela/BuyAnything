@@ -18,7 +18,7 @@ import {
 } from "../ContextProvider/withProvider";
 import Alert from "../ContextProvider/Alert";
 
-const SignUpPage = ({ alert, setAlert, setUser }) => {
+const SignUpPage = ({ alert, setAlert, setUser, user }) => {
   const [visiblePswd, setVisiblePswd] = useState(false);
   const [type, setType] = useState("");
   useEffect(() => {
@@ -66,6 +66,10 @@ const SignUpPage = ({ alert, setAlert, setUser }) => {
       .max(12, "at most 12 characters")
       .oneOf([Yup.ref("create_password"), null], "Passwords must match"),
   });
+
+  if (user.id) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="flex flex-col justify-center items-center h-screen space-y-1">

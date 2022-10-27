@@ -18,10 +18,9 @@ const CartList = ({ cart, updateCart }) => {
     );
 
   const removeProduct = (id) => {
-  
     const newQuantityMap = cartToQuantityMap();
-   delete newQuantityMap[id];
-     updateCart(newQuantityMap);
+    delete newQuantityMap[id];
+    updateCart(newQuantityMap);
   };
   const handleUpdateCart = (updatedCartObject) => {
     updateCart(updatedCartObject);

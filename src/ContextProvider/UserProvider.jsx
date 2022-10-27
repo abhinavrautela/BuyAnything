@@ -21,6 +21,7 @@ const UserProvider = ({ children }) => {
         })
         .catch(() => {
           setUser(undefined);
+          localStorage.removeItem("MyToken");
           setUserLoading(false);
         });
     } else setUserLoading(false);

@@ -1,9 +1,8 @@
 import React from "react";
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
-import { withUser } from "./ContextProvider/withProvider";
 
-const MainLayout = ({ isLoggedIn }) => {
+const MainLayout = () => {
   return (
     <div>
       <Navbar />
@@ -14,4 +13,4 @@ const MainLayout = ({ isLoggedIn }) => {
   );
 };
 
-export default withUser(MainLayout);
+export default MainLayout;

@@ -37,14 +37,14 @@ const CartProvider = ({ children, isLoggedIn }) => {
     if (isLoggedIn) {
       saveCart(quantityMap).then((response) => quantityMapToCart(quantityMap));
     } else {
-
       localStorage.setItem("my-cart", JSON.stringify(quantityMap));
-     
-}
+    }
   };
 
-  const totalCount = cart.reduce((previous, current) => previous + current.quantity, 0)
-  
+  const totalCount = cart.reduce(
+    (previous, current) => previous + current.quantity,
+    0
+  );
 
   return (
     <CartContext.Provider value={{ cart, updateCart, addToCart, totalCount }}>

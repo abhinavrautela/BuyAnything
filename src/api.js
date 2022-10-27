@@ -56,6 +56,6 @@ export const getProducts = (search, sort, page, sortType) => {
    }
 
 export const getProductsDetail = (id) => {
-    const response = axios.get(BASE_URL+"product/"+id)
+    const response = axios.get(BASE_URL + "product/"+ id)
     return response;
    }
