@@ -37,6 +37,7 @@ const CartProvider = ({ children, isLoggedIn }) => {
     if (isLoggedIn) {
       saveCart(quantityMap).then((response) => quantityMapToCart(quantityMap));
     } else {
+      quantityMapToCart(quantityMap);
       localStorage.setItem("my-cart", JSON.stringify(quantityMap));
     }
   };
