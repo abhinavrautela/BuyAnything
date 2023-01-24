@@ -10,4 +10,5 @@ Using the two in conjunction is one of the fastest ways to build a web app.
 ### Getting Started
 
 : to Start - npm run dev 
+
 : to build - npm run build
